@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style2.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+</head>
+<body>
+    <div class="sidebar">
+		<h2><a href="Index.html"> Menu </a></h2>
+		<ul>
+			<li><a href="#">Rooms</a></li>
+			<li><a href="#">Tenants</a></li>
+            <li><a href="#">New Applications</a></li>
+			<li><a href="wardeninformation.html">Warden Information</a></li>
+			<li><a href="#">Complaints</a></li>
+			<li><button id="logout-btn" onclick="logOut()">Log Out</button></li>
+		</ul>
+	</div>
+	<div class="main">
+		<h1>Welcome to the Admin Dashboard</h1>
+		<div class="cards">
+			<div class="card">
+				<h2>Vacant Rooms</h2>
+				<p id="vacant-rooms">0</p>
+			</div>
+			<div class="card">
+				<h2>New Applications</h2>
+				<p id="new-applications">0</p>
+			</div>
+			<div class="card">
+				<h2>Pending Complaints</h2>
+				<p id="pending-complaints">0</p>
+			</div>
+		</div>
+		<p>Here you can manage the rooms, tenants, warden information, and complaints.</p>
+	</div>
+	<script src="script2.js"></script>
+    
+</body>
+</html>
