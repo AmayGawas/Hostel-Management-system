@@ -1,1 +1,2 @@
-# Hostel-Management-system
+# Hostel_Management_frontend
+using html,css,js
