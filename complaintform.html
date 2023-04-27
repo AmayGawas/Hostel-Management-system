@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style2.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    CSS here
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+  
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+        }
+  
+        h1 {
+          margin-top: 0;
+        }
+  
+        label {
+          display: block;
+          margin-bottom: 10px;
+        }
+  
+        input,
+        select,
+        textarea {
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-bottom: 10px;
+          padding: 10px;
+          width: 100%;
+        }
+  
+        button[type="submit"] {
+          background-color: #085be2;
+          border: none;
+          color: white;
+          cursor: pointer;
+          padding: 10px 20px;
+        }
+  
+        button[type="submit"]:hover {
+          background-color: #081168;
+        }
+  
+        form {
+          margin: 20px auto;
+          max-width: 500px;
+          padding: 20px;
+        }
+      </style>
+
+</head>
+<body>
+    <div class="sidebar">
+		<h2><a href="studentdashboard.html"> Menu </a></h2>
+		<ul>
+			<li><a href="#">Notices</a></li>
+			<li><a href="#">Stay details</a></li>
+			<li><a href="wardeninformation.html">Warden Information</a></li>
+			<li><a href="complaintform.html">Raise an Issue</a></li>
+			<li><button id="logout-btn" onclick="logOut()">Log Out</button></li>
+		</ul>
+	</div>
+	<div class="main">
+		code goes here
+        <h1>Complaint Form</h1>
+        <form id="complaint-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+    
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+    
+          <label for="Room">Room No:</label>
+          <input type="text" id="room" name="room" required>
+    
+          <label for="complaint-type">Complaint Type:</label>
+          <select id="complaint-type" name="complaint-type" required>
+            <option value="">-- Select complaint type --</option>
+            <option value="Facilities">Facilities</option>
+            <option value="Mess">Mess</option>
+            <option value="Other">Other</option>
+          </select>
+    
+          <label for="complaint-description">Complaint Description:</label>
+          <textarea id="complaint-description" name="complaint-description" required></textarea>
+    
+          <button type="submit">Submit Complaint</button>
+        </form>
+	</div>
+	<script src="script4.js"></script>
+    
+    script goes here
+    <script>
+        const complaintForm = document.querySelector('#complaint-form');
+        complaintForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const formData = new FormData(complaintForm);
+          const data = Object.fromEntries(formData.entries());
+          console.log('Complaint form submitted:', data);
+          alert('Complaint form submitted successfully!');
+          complaintForm.reset();
+        });
+      </script>
+</body>
+</html>
