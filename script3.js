@@ -84,7 +84,7 @@ function login() {
     .then(data => {
       if (data.success) {
         // Redirect to user dashboard on successful login
-        window.location.href = "/Index";
+        window.location.href = "/studentdashboard";
       } else {
         alert("Incorrect email or password.");
       }

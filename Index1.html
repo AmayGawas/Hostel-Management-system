@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goa university hostel</title>
+</head>
+<body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .login{
+        margin-left: 20px;
+        padding-left: 40px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+      
+        
+    }
+    .login2{
+        padding-left: 40px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #075bb5ce;
+      
+        
+    }
+    .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 400px;
+  margin: 10px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+		.card h2 {
+			font-size: 24px;
+			margin-bottom: 10px;
+		}
+		.card p {
+			font-size: 18px;
+			color: #666;
+			margin-bottom: 0;
+		}
+    .header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: auto;
+        color: #fff;
+        text-decoration: none;
+    }
+    .register-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        display: block;
+        margin: 50px auto;
+        width: 200px;
+        text-align: center;
+    }
+    .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .footer a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .form-popup {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      right: 15px;
+      border: 1px solid #ccc;
+      z-index: 9;
+      background-color: #fff;
+      max-width: 300px;
+      padding: 10px;
+    }
+    .form-popup label {
+      display: block;
+      margin-top: 10px;
+    }
+    .form-popup input[type="text"],
+    .form-popup select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+    .form-popup input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .form-popup input[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
+    .close-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .close-btn:hover {
+      color: #f00;
+    }
+    @media (max-width: 1000px) {
+			.card {
+				width: calc(50% - 40px);
+			}
+		}
+		@media (max-width: 600px) {
+			.card {
+				width: calc(100% - 40px);
+			}
+			.register-button {
+				width: 80%;
+			}
+		}
+        @media only screen and (max-width: 600px) {
+  .card {
+    width: calc(100% - 20px);
+    margin: 10px 0;
+  }
+}
+</style>
+</head>
+<body>
+<header class="header">
+    <a href="#" class="logo">College Hostel</a>
+    <a class="login" href="login.html" class="login-link"> Admin LogIn</a>
+    <a class="login2" href="studentlogin.html" class="login-link"> Student LogIn</a>
+</header>
+
+<main>
+<div class="card-container">    
+    <div class="card">
+        <h2>Well Maintained Rooms</h2>
+        <p>Our rooms are clean, comfortable, and well-maintained to ensure a pleasant stay.</p>
+    </div>
+    <div class="card">
+        <h2>Mess: Breakfast, Lunch, Dinner</h2>
+        <p>We provide delicious and healthy meals for breakfast, lunch, and dinner.</p>
+    </div>
+    <div class="card">
+        <h2>Temporary Stay Available</h2>
+        <p>We offer temporary accommodation for students who need a place to stay for a short period of time.</p>
+    </div>
+    <div class="card">
+    <h2>Online Registrations Accepted</h2>
+    <p>You can easily register online and reserve your spot in our hostel.</p>
+    </div>
+</div>    
+    <a href="registrationform.html" class="register-button" id="register-btn">Register Now</a>
+    
+    
+</main>
+
+
+</body>
+</html>
