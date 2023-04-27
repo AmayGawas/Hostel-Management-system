@@ -9,16 +9,23 @@
 <body>
 <style>
     body {
+        background-image: url(bg2.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        
+        
+ 
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
+        
     }
     .login{
         margin-left: 20px;
         padding-left: 40px;
         text-decoration: none;
         color: #fff;
-        background-color: #007bff;
+        background-color: #a87e4b;
       
         
     }
@@ -55,7 +62,7 @@
 			margin-bottom: 0;
 		}
     .header {
-        background-color: #333;
+        background-color: #2b97fc;
         color: #fff;
         padding: 10px;
         display: flex;
@@ -73,12 +80,14 @@
         background-color: #007bff;
         color: #fff;
         padding: 10px 20px;
+        
         border-radius: 5px;
         font-size: 18px;
         font-weight: bold;
         text-decoration: none;
         display: block;
-        margin: 50px auto;
+        margin: 10px auto;
+        
         width: 200px;
         text-align: center;
     }
@@ -90,6 +99,11 @@
         position: absolute;
         bottom: 0;
         width: 100%;
+    }
+    span{
+      font-weight: bold;
+      color: #007bff;
+      
     }
     .footer a {
         color: #fff;
@@ -106,30 +120,8 @@
       max-width: 300px;
       padding: 10px;
     }
-    .form-popup label {
-      display: block;
-      margin-top: 10px;
-    }
-    .form-popup input[type="text"],
-    .form-popup select {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-top: 5px;
-    }
-    .form-popup input[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .form-popup input[type="submit"]:hover {
-      background-color: #3e8e41;
-    }
+  
+   
     .close-btn {
       position: absolute;
       top: 0;
@@ -140,6 +132,28 @@
     .close-btn:hover {
       color: #f00;
     }
+    table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+
+th {
+  background-color: #fff7f1;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#vacantpgmenroom, #vacantpgwomenroom, #vacantphdmenroom, #vacantphdwomenroom, #semfee {
+  font-weight: bold;
+}
     @media (max-width: 1000px) {
 			.card {
 				width: calc(50% - 40px);
@@ -163,35 +177,148 @@
 </head>
 <body>
 <header class="header">
-    <a href="#" class="logo">College Hostel</a>
+    <a href="#" class="logo">Goa university hostel</a>
     <a class="login" href="login.html" class="login-link"> Admin LogIn</a>
     <a class="login2" href="studentlogin.html" class="login-link"> Student LogIn</a>
 </header>
 
 <main>
 <div class="card-container">    
-    <div class="card">
-        <h2>Well Maintained Rooms</h2>
-        <p>Our rooms are clean, comfortable, and well-maintained to ensure a pleasant stay.</p>
-    </div>
-    <div class="card">
-        <h2>Mess: Breakfast, Lunch, Dinner</h2>
-        <p>We provide delicious and healthy meals for breakfast, lunch, and dinner.</p>
-    </div>
+  <div class="card">
+    <h2>Well Maintained Rooms</h2>
+    <table>
+      <tr>
+        <th>Hostel</th>
+        <th>Vacant Rooms</th>
+      </tr>
+      <tr>
+        <td>PG Men Hostel</td>
+        <td><span id="vacantpgmenroom">0</span></td>
+      </tr>
+      <tr>
+        <td>PG Women Hostel</td>
+        <td><span id="vacantpgwomenroom">0</span></td>
+      </tr>
+      <tr>
+        <td>PHD Men Hostel</td>
+        <td><span id="vacantphdmenroom">0</span></td>
+      </tr>
+      <tr>
+        <td>PHD Women Hostel</td>
+        <td><span id="vacantphdwomenroom">0</span></td>
+      </tr>
+    </table>
+    <p>Hostel fee per semester: <span id="semfee">0</span>.</p>
+  </div>
+ 
+<div class="card">
+  <h2>Mess: Breakfast, Lunch, Dinner</h2>
+  <table>
+    <tr>
+      <th>Type</th>
+      <th>days</th>
+      <th>Per Semester</th>
+    </tr>
+    <tr>
+      <td>Veg</td>
+      <td>5/7</td>
+      <td><span id="5dveg">0</span>/<span id="7dveg">0</span></td>
+    </tr>
+    <tr>
+      <td>Non-veg</td>
+      <td>5/7</td>
+      <td><span id="5dnveg">0</span>/<span id="7dnveg">0</span></td>
+    </tr>
+  </table>
+  <table>
+    <tr>
+      <th>Meal</th>
+      <th>Price Per Meal</th>
+    </tr>
+    <tr>
+      <td>Breakfast</td>
+      <td><span id="1breakfast">0</span></td>
+    </tr>
+    <tr>
+      <td>Veg Lunch/Dinner</td>
+      <td><span id="vld">0</span></td>
+    </tr>
+    <tr>
+      <td>Non-veg Lunch/Dinner</td>
+      <td><span id="nvld">0</span></td>
+    </tr>
+  </table>
+</div>
     <div class="card">
         <h2>Temporary Stay Available</h2>
-        <p>We offer temporary accommodation for students who need a place to stay for a short period of time.</p>
+        <p>Cost of stay per day: <span id="staycharge">0</span>.</p>
+        
+        <p>Mess fee per day: <span id="mfpd">  0</span>.</p>
+        <p>For temporary stay of more than 22 days, paying mess fee is compulsory!</p>
     </div>
     <div class="card">
     <h2>Online Registrations Accepted</h2>
-    <p>You can easily register online and reserve your spot in our hostel.</p>
+    <p>You can easily register online and reserve your spot in our hostel.</p><br>
+    <a href="registrationform.html" class="register-button" id="register-btn">Register Now</a>
     </div>
 </div>    
-    <a href="registrationform.html" class="register-button" id="register-btn">Register Now</a>
+    
     
     
 </main>
+<script>
+  const semfeeElement = document.getElementById('semfee');
+  const fivedvegElement = document.getElementById('5dveg');
+  const sevendvegElemnet = document.getElementById('7dveg');
+  const fivednvegElement = document.getElementById('5dnveg');
+  const sevendnvegElemnet = document.getElementById('7dnveg');
+  const onebreakfastElement = document.getElementById('1breakfast');
+  const vldElement=document.getElementById('vld');
+  const nvldElement=document.getElementById('nvld');
+  const vacantpgmenroomElement= document.getElementById('vacantpgmenroom');
+  const vacantphdmenroomElement= document.getElementById('vacantphdmenroom');
+  const vacantpgwomenroomElement= document.getElementById('vacantpgwomenroom');
+  const vacantphdwomenroomElement= document.getElementById('vacantphdwomenroom');
+  const staychargeElement= document.getElementById('staycharge');
+  const mfpdElement= document.getElementById('mfpd');
+  // Function to update the numbers on the cards
+function updateNumbers() {
+  const semfee ='3000';
+  const fivedveg = 'Rs 9,350'; // Example number, replace with actual value from server
+  const sevendveg = '11,350'; // Example number, replace with actual value from server
+  const fivednveg = '12'; // Example number, replace with actual value from server
+  const sevendnveg= '99';
+  const onebreakfast= '01';
+  const vld='01';
+  const nvld='01';
+  const pgmr='05';
+  const phdmr='22';
+  const pgwmr='02';
+  const phdwmr='05';
+  const accommodation_fee_per_day='10';
+  const mfpd='01';
+  
+  // Update the numbers on the cards
+  semfeeElement.textContent = semfee;
+  fivedvegElement.textContent = fivedveg;
+  sevendvegElemnet.textContent = sevendveg;
+  fivednvegElement.textContent= fivednveg;
+  sevendnvegElemnet.textContent = sevendnveg;
+  onebreakfastElement.textContent = onebreakfast;
+  vldElement.textContent = vld;
+  nvldElement.textContent =nvld;
+  vacantpgmenroomElement.textContent=pgmr;
+  vacantpgwomenroomElement.textContent=phdmr;
+  vacantphdmenroomElement.textContent=pgmr;
+  vacantphdwomenroomElement.textContent=phdmr;
+  staychargeElement.textContent=accommodation_fee_per_day;
+  mfpdElement.textContent=mfpd;
 
+}
+
+// Call the function initially to set the numbers on page load
+updateNumbers();
+</script>
 
 </body>
 </html>

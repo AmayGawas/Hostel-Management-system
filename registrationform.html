@@ -122,6 +122,10 @@ input[type="file"] {
         <label for="address">Enter detailed address:</label>
         <input type="text" id="address" name="address" required>
       </div>
+      <div class="form-group">
+        <label for="distance">Distance from hostel:</label>
+        <input type="number" id="distance" name="distance" required>
+      </div>
     <div class="form-group">
       <label for="contact-input">Contact:</label>
       <input type="tel" id="contact-input" name="contact" pattern="[0-9]{10}" required>
@@ -219,6 +223,7 @@ document.querySelector('#apply-button').addEventListener('click', () => {
   const gcontact=document.querySelector('#gcontact-input',gcontact).value;
   const fitness = document.querySelector('#fitness-input').files[0];
   const bonafied = document.querySelector('#bonafied-input').files[0];
+  const distance = document.querySelector('#distance',distance).value;
   // Create form data object
   const formData = new FormData();
   formData.append('name', name);
@@ -240,6 +245,7 @@ document.querySelector('#apply-button').addEventListener('click', () => {
   formData.append('gcontact', gcontact);
   formData.append('fitness', fitness);
   formData.append('bonafied', bonafied);
+  formData.append('distance',distance);
   // Make HTTP POST request
   fetch('/', {
     method: 'POST',
