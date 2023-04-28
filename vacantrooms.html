@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style2.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Applications</title>
+   <style>
+    table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+@media screen and (max-width: 768px) {
+  table {
+
+    border: none;
+  }
+  
+  th, td {
+    display: block;
+    width: 100%;
+  }
+  
+  th {
+    text-align: center;
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: inline-block;
+    width: 70%;
+    margin-left: -70%;
+  }
+}
+   </style>
+    
+</head>
+<body>
+    <div class="sidebar">
+		<h2><a href="Index.html"> Menu </a></h2>
+		<ul>
+			<li><a href="#">Rooms</a></li>
+			<li><a href="#">Tenants</a></li>
+            <li><a href="newapplications.html">New Applications</a></li>
+			<li><a href="wardeninformation.html">Warden Information</a></li>
+			<li><a href="#">Complaints</a></li>
+			<li><button id="logout-btn" onclick="logOut()">Log Out</button></li>
+		</ul>
+	</div>
+	<div class="main">
+		<h1>Welcome to the Admin Dashboard</h1>
+		<div class="cards">
+			<div class="card">
+				<h2>Available Vacancies</h2>
+				<p id="vacant-rooms">0</p>
+			</div>
+			
+	</div>
+    <br>
+    <br>
+
+    <table id="applicants">
+        <thead>
+          <tr>
+            <th>Applicant ID</th>
+            <th>Applicant Name</th>
+            <th>Payment ID</th>
+            <th>Allot Room</th>
+            <th>Mess</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+  </body>
+</html>
+    <script>
+
+
+
+const wardenID = getWardenID();
+// Get the hostel ID corresponding to the warden ID
+const hostelID = getHostelID(wardenID);
+
+// Get the list of vacant rooms from the hostel ID
+const vacantRooms = getVacantRooms(hostelID);
+
+// Load data dynamically from the database and populate the table
+const table = document.getElementById("applicants");
+
+// Create a new row for each applicant
+for (let i = 0; i < data.length; i++) {
+  const row = table.insertRow(i+1);
+  
+  // Insert the applicant ID
+  const applicantID = row.insertCell(0);
+  applicantID.innerHTML = data[i].applicant_id;
+  
+  // Insert the applicant name
+  const applicantName = row.insertCell(1);
+  applicantName.innerHTML = data[i].applicant_name;
+  
+  // Insert the payment ID
+  const paymentID = row.insertCell(2);
+  paymentID.innerHTML = data[i].payment_id;
+
+  function createMessDropdown() {
+  const options = ["5 days veg", "7 days veg", "5 days non-veg", "7 days non-veg", "none"];
+  const select = document.createElement("select");
+  for (let i = 0; i < options.length; i++) {
+    const option = document.createElement("option");
+    option.value = options[i];
+    option.text = options[i];
+    select.appendChild(option);
+  }
+  return select;
+}
+  
+  // Insert the allot room dropdown
+  const allotRoom = row.insertCell(3);
+  const dropdown = document.createElement("select");
+  
+  // Add options to the dropdown based on the vacant rooms
+  for (let j = 0; j < vacantRooms.length; j++) {
+    const option = document.createElement("option");
+    option.value = vacantRooms[j];
+    option.text = vacantRooms[j];
+    dropdown.appendChild(option);
+  }
+  
+  allotRoom.appendChild(dropdown);
+  
+  // Insert the Allot Room button
+  const allotButton = row.insertCell(4);
+  const button = document.createElement("button");
+  button.innerHTML = "Allot Room";
+  
+  // Add onclick function to allot the selected room to the applicant
+  button.onclick = function() {
+    const selectedRoom = dropdown.value;
+    const selectedMess = messSelect.value;
+    const applicantID = data[i].applicant_id;
+    
+    // Make a POST request to allot the room to the applicant
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/allot-room", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        console.log(xhr.responseText);
+
+        
+        
+        // Remove the allotted room from the dropdown
+        for (let k = 0; k < dropdown.options.length; k++) {
+          if (dropdown.options[k].value === selectedRoom) {
+            dropdown.remove(k);
+            break;
+          }
+        }
+        
+        // Update the vacant rooms in the database
+        updateVacantRooms(hostelID, selectedRoom);
+      }
+    };
+    
+    xhr.send(JSON.stringify({
+      applicantID: applicantID,
+      roomNumber: selectedRoom
+    }));
+  };
+  
+  allotButton.appendChild(button);
+}
+
+// dummy data
+
+    </script>
+    
+</body>
+</html>
