@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+		}
+
+		.container {
+			max-width: 500px;
+			margin: 50px auto;
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+		}
+
+		h1 {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		form {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+
+		input[type="text"],
+		input[type="number"],
+		input[type="file"] {
+			width: 100%;
+			padding: 12px;
+			margin-bottom: 20px;
+			border: none;
+			border-radius: 4px;
+			background-color: #f2f2f2;
+		}
+
+		input[type="text"]:focus,
+		input[type="number"]:focus,
+		input[type="file"]:focus {
+			background-color: #ddd;
+			outline: none;
+		}
+
+		input[type="submit"] {
+			background-color: #233085;
+			color: #fff;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			width: 100%;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #141151;
+		}
+
+		@media screen and (max-width: 600px) {
+			form {
+				flex-direction: column;
+			}
+		}
+	</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment details form</title>
+</head>
+<body>
+    <div class="container">
+		<h1>Payment Details Form</h1>
+		<form id="payment-form" enctype="multipart/form-data">
+			<label for="payment_id">Transaction ID:</label>
+			<input type="text" id="payment_id" name="payment-id" placeholder="Enter Transaction ID" required>
+
+			<label for="payment_description">Remark:</label>
+			<input type="text" id="payment_description" name="payment-description" placeholder="Enter Remark eg:Hostel fee" required>
+
+			<label for="payment_amount">Payment Amount:</label>
+			<input type="number" id="payment_amount" name="payment-amount" placeholder="Enter Payment Amount" required>
+
+			<label for="receipt_file">Payment Receipt:</label>
+			<input type="file" id="receipt_file" name="receipt-photo" accept="image/*" required>
+
+			<input type="submit" value="Submit Payment Details" onclick="postPaymentDetails(event)">
+		</form>
+	</div>
+
+	<script>
+		function postPaymentDetails(event) {
+			event.preventDefault();
+			const form = document.getElementById("payment-form");
+			const formData = new FormData(form);
+			fetch("url-to-post-data-to-database", {
+                method: "POST",
+			body: formData
+		})
+		.then(response => {
+			if (response.ok) {
+				alert("Payment details submitted successfully.");
+				form.reset();
+			} else {
+				alert("An error occurred while submitting payment details. Please try again later.");
+			}
+		})
+		.catch(error => {
+			alert("An error occurred while submitting payment details. Please try again later.");
+		});
+	}
+</script>
+    
+</body>
+</html>
