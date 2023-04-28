@@ -21,6 +21,10 @@
 }
 button{
     margin-left: 200px;
+    color: #fafafa;
+    background-color: #4316be;
+    border: none;
+    margin-top: 10px;
 }
 .card6 {
   flex: 0 0 auto;
@@ -108,6 +112,7 @@ td:first-child {
       <th>Address</th>
       <th>Contact</th>
       <th>Email</th>
+      <th>Status</th>
     </tr>
     <tr>
       <td id="applicant_id"></td>
@@ -131,6 +136,7 @@ td:first-child {
       <td id="guardian_address"></td>
       <td id="guardian_contact"></td>
       <td id="guardian_email"></td>
+      
     </tr>
 </table>
 </div>
@@ -165,6 +171,8 @@ var dummyData = [
     guardian_address: "456 Oak St",
     guardian_contact: "555-555-5678",
     guardian_email: "jane.doe@example.com",
+    
+
   },
   {
     applicant_id: "1002",
@@ -219,6 +227,7 @@ for (var i = 0; i < dummyData.length; i++) {
   var guardianAddressCell = row.insertCell(18);
   var guardianContactCell = row.insertCell(19);
   var guardianEmailCell = row.insertCell(20);
+ 
 
   // add the data from the current object to the cells
   idCell.innerHTML = dummyData[i].applicant_id;
@@ -242,6 +251,7 @@ for (var i = 0; i < dummyData.length; i++) {
   guardianAddressCell.innerHTML = dummyData[i].guardian_address;
   guardianContactCell.innerHTML = dummyData[i].guardian_contact;
   guardianEmailCell.innerHTML = dummyData[i].guardian_email;
+  
 }
 
 function sortTableByDistance() {
@@ -266,6 +276,46 @@ function sortTableByDistance() {
     table.appendChild(arr[i]);
   }
 }
+
+
+function addButtonsToTable() {
+  var table = document.getElementById("card8");
+  var rows = table.rows;
+
+  for (var i = 3; i < rows.length; i++) {
+    var cell = rows[i].insertCell(-1);
+    var Approved = document.createElement("button");
+    Approved.textContent = "Approve";
+    Approved.onclick = function() {
+      var applicationId = this.parentNode.parentNode.cells[0].textContent;
+      var value = "Approved";
+      var url = "https://";
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
+    };
+    
+    var rejected = document.createElement("button");
+    rejected.textContent = "Reject";
+    rejected.onclick = function() {
+      var applicationId = this.parentNode.parentNode.cells[0].textContent;
+      var value = "Rejected";
+      var url = "https://";
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
+    };
+    
+    cell.appendChild(Approved);
+    cell.appendChild(rejected);
+  }
+}
+
+addButtonsToTable();
+
+
     </script>
 </body>
 </html>
