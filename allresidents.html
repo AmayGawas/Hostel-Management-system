@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style2.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Applications</title>
+	<style>
+		table {
+		  overflow-x: auto;
+		  display: block;
+		}
+
+		th, td {
+		  min-width: 120px;
+		  padding: 8px;
+		  text-align: left;
+		}
+
+		@media screen and (max-width: 768px) {
+		  th, td {
+		    min-width: 80px;
+		  }
+		}
+	</style>
+</head>
+<body>
+    <div class="sidebar">
+		<h2><a href="Index.html"> Menu </a></h2>
+		<ul>
+			<li><a href="#">Rooms</a></li>
+			<li><a href="#">Tenants</a></li>
+            <li><a href="newapplications.html">New Applications</a></li>
+			<li><a href="wardeninformation.html">Warden Information</a></li>
+			<li><a href="#">Complaints</a></li>
+			<li><button id="logout-btn" onclick="logOut()">Log Out</button></li>
+		</ul>
+	</div>
+	<div class="main">
+        <table>
+            <thead>
+                <tr>
+                    <th>Applicant Name</th>
+                    <th>Course Type</th>
+                    <th>Applicant Course</th>
+                    <th>Room No</th>
+                    <th>Mess Type</th>
+                    <th>Payment ID</th>
+                    <th>Sex</th>
+                    <th>Aadhar</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Distance</th>
+                    <th>Photo</th>
+                    <th>Email</th>
+                    <th>Medical Certificate</th>
+                    <th>Bonified Certificate</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Guardian Name</th>
+                    <th>Relation</th>
+                    <th>Guardian Aadhar</th>
+                    <th>Guardian Address</th>
+                    <th>Guardian Contact</th>
+                    <th>Guardian Email</th>
+                    <th>Application Status</th>
+                    <th>Archive</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>Undergraduate</td>
+                    <td>Bachelor of Science</td>
+                    <td>123</td>
+                    <td>Vegetarian</td>
+                    <td>ABC123XYZ</td>
+                    <td>Male</td>
+                    <td>1234567890123456</td>
+                    <td>123 Main St, Anytown, USA</td>
+                    <td>123-456-7890</td>
+                    <td><img src="https://example.com/photo.jpg" alt="Photo of John Doe"></td>
+                    <td>johndoe@example.com</td>
+                    <td>Fit to Attend</td>
+                    <td>Excellent</td>
+                    <td>2023-09-01</td>
+                    <td>2027-05-30</td>
+                    <td>Jane Doe</td>
+                    <td>Mother</td>
+                    <td>9876543210987654</td>
+                    <td>456 Oak St, Anytown, USA</td>
+                    <td>123-456-7890</td>
+                    <td>jane@example.com</td>
+                    <td>Pending</td>
+                    <td><button>Archive</button></td>
+                </tr>
+                <!-- add more rows as needed -->
+            </tbody>
+        </table>
+	</div>
+	<script src="script2.js"></script>
+    <script>
+        // Get the table body element
+var tableBody = document.querySelector('tbody');
+
+// Function to add a row to the table
+function addTableRow(resident) {
+  // Create a new row element
+  var newRow = document.createElement('tr');
+
+  // Add the resident data to the row
+  newRow.innerHTML = `
+    <td>${resident.applicant_name}</td>
+    <td>${resident.course_type}</td>
+    <td>${resident.applicant_course}</td>
+    <td>${resident.room_no}</td>
+    <td>${resident.mess_type}</td>
+    <td>${resident.payment_id}</td>
+    <td>${resident.sex}</td>
+    <td>${resident.aadhar}</td>
+    <td>${resident.address}</td>
+    <td>${resident.contact}</td>
+    <td><img src="${resident.photo}" alt="Photo of ${resident.applicant_name}"></td>
+    <td>${resident.email}</td>
+    <td>${resident.medical_certificate}</td>
+    <td>${resident.bonified_certificate}</td>
+    <td>${resident.start_date}</td>
+    <td>${resident.end_date}</td>
+    <td>${resident.guardian_name}</td>
+    <td>${resident.relation}</td>
+    <td>${resident.guardian_aadhar}</td>
+    <td>${resident.guardian_address}</td>
+    <td>${resident.guardian_contact}</td>
+    <td>${resident.guardian_email}</td>
+    <td>${resident.application_status}</td>
+    <td><button onclick="archiveResident(${resident.resident_id})">Archive</button></td>
+  `;
+
+  // Append the row to the table
+  tableBody.appendChild(newRow);
+}
+
+// Function to archive a resident
+function archiveResident(residentId) {
+  // Make an API call to your backend to archive the resident data based on the resident_id
+  // For example, you can use the fetch() method to make a POST request to an endpoint like /archiveResident with the resident_id as a parameter
+  // Once the resident data is successfully archived, you can remove the corresponding row from the table using the remove() method
+
+  // Get the row element for the resident and remove it from the table
+  var row = document.querySelector(`tr[data-resident-id="${residentId}"]`);
+  row.remove();
+}
+
+// Function to fetch the resident data from the database and add it to the table
+function loadResidents() {
+  // Make an API call to your backend to get the resident data from the database
+  // For example, you can use the fetch() method to make a GET request to an endpoint like /getResidents
+  // The API response should return a JSON array of resident objects
+  fetch('/getResidents')
+    .then(response => response.json())
+    .then(residents => {
+      // Loop through the residents and add them to the table
+      residents.forEach(resident => {
+        addTableRow(resident);
+
+        // Add a data-resident-id attribute to the row for easy reference when archiving the resident
+        var row = tableBody.lastChild;
+        row.setAttribute('data-resident-id', resident.resident_id);
+      });
+    });
+}
+
+// Call the loadResidents() function to fetch and display the resident data in the table
+loadResidents();
+
+    </script>
+    
+</body>
+</html>
