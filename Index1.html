@@ -282,9 +282,30 @@ tr:nth-child(even) {
   const staychargeElement= document.getElementById('staycharge');
   const mfpdElement= document.getElementById('mfpd');
   // Function to update the numbers on the cards
-function updateNumbers() {
-  let dummyData = []
-    fetch('http://127.0.0.1:8080/api/applicant/getAllApplicant', {
+function updateMessCharges() {
+  const fivedveg = 'Rs 9,350'; // Example number, replace with actual value from server
+  const sevendveg = 'Rs 11,350'; // Example number, replace with actual value from server
+  const fivednveg = 'Rs 12,300'; // Example number, replace with actual value from server
+  const sevendnveg= 'Rs 16,500';
+  const onebreakfast= 'Rs 30';
+  const vld='Rs 55';
+  const nvld='Rs 65';
+  const mfpd='Rs 148';
+  
+  // Update the numbers on the cards
+  fivedvegElement.textContent = fivedveg;
+  sevendvegElemnet.textContent = sevendveg;
+  fivednvegElement.textContent= fivednveg;
+  sevendnvegElemnet.textContent = sevendnveg;
+  onebreakfastElement.textContent = onebreakfast;
+  vldElement.textContent = vld;
+  nvldElement.textContent =nvld;
+  mfpdElement.textContent=mfpd;
+    
+    }
+
+    function updateHostelVacancy(){
+      fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Men_PG/', {
       method: "get", // *GET, POST, PUT, DELETE, etc.
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
@@ -300,49 +321,51 @@ function updateNumbers() {
         }
       } else {
         // Display error message
-
+        console.log("Error occured")
       }
     }).then((responseJson) => {
       dummyData = responseJson;
+      const pgmr=dummyData;
 
-  const semfee ='Rs 3000';
-  const fivedveg = 'Rs 9,350'; // Example number, replace with actual value from server
-  const sevendveg = 'Rs 11,350'; // Example number, replace with actual value from server
-  const fivednveg = 'Rs 12,300'; // Example number, replace with actual value from server
-  const sevendnveg= 'Rs 16,500';
-  const onebreakfast= 'Rs 30';
-  const vld='Rs 55';
-  const nvld='Rs 65';
-  const pgmr='05';
-  const phdmr='22';
-  const pgwmr='02';
-  const phdwmr='05';
-  const accommodation_fee_per_day='Rs 75';
-  const mfpd='Rs 148';
-  
-  // Update the numbers on the cards
-  semfeeElement.textContent = semfee;
-  fivedvegElement.textContent = fivedveg;
-  sevendvegElemnet.textContent = sevendveg;
-  fivednvegElement.textContent= fivednveg;
-  sevendnvegElemnet.textContent = sevendnveg;
-  onebreakfastElement.textContent = onebreakfast;
-  vldElement.textContent = vld;
-  nvldElement.textContent =nvld;
-  vacantpgmenroomElement.textContent=pgmr;
-  vacantpgwomenroomElement.textContent=phdmr;
-  vacantphdmenroomElement.textContent=pgmr;
-  vacantphdwomenroomElement.textContent=phdmr;
-  staychargeElement.textContent=accommodation_fee_per_day;
-  mfpdElement.textContent=mfpd;
+      vacantpgmenroomElement.textContent=pgmr;
     })
       .catch(error => {
-
+        console.log("Error occured ", error)
       });
+
+
+
+      
+      const phdmr='22';
+      const pgwmr='02';
+      const phdwmr='05';
+
+      
+      vacantpgwomenroomElement.textContent=phdmr;
+      vacantphdmenroomElement.textContent=pgmr;
+      vacantphdwomenroomElement.textContent=phdmr;
     }
 
-// Call the function initially to set the numbers on page load
-updateNumbers();
+    function  updateHostelFess(){
+      const semfee ='Rs 3000';
+      const accommodation_fee_per_day='Rs 75';
+
+      semfeeElement.textContent = semfee;
+      staychargeElement.textContent=accommodation_fee_per_day;
+    }
+
+function updateValues() {
+  updateHostelVacancy();
+  updateHostelFess();
+  updateMessCharges();
+
+}
+
+let dummyData = []
+    
+
+  // Call the function initially to set the numbers on page load
+  updateValues();
 </script>
 
 </body>
