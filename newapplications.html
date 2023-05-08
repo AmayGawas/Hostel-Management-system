@@ -1,321 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="style2.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Applications</title>
-    css goes here
-    <style>
-        table{
-            margin-left: 50px;
-        }
-        .card-scroll-container {
-  overflow-x: auto;
-}
+  <link rel="stylesheet" href="style2.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Applications</title>
+  css goes here
+  <style>
+    table {
+      margin-left: 50px;
+    }
 
-.card-container {
-  display: flex;
-  flex-wrap: nowrap;
-}
-button{
-    margin-left: 200px;
-    color: #fafafa;
-    background-color: #4316be;
-    border: none;
-    margin-top: 10px;
-}
-.card6 {
-  flex: 0 0 auto;
-  margin: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: 400px;
-}
+    .card-scroll-container {
+      overflow-x: auto;
+    }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-left: 200px;
-}
-.ginfo
-{
-    background-color: rgb(77, 240, 186);
-}
+    .card-container {
+      display: flex;
+      flex-wrap: nowrap;
+    }
 
-th, td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
+    button {
+      margin-left: 200px;
+      color: #fafafa;
+      background-color: #4316be;
+      border: none;
+      margin-top: 10px;
+    }
 
-th {
-  background-color: #f2f2f2;
-  font-weight: normal;
-}
+    .card6 {
+      flex: 0 0 auto;
+      margin: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 400px;
+    }
 
-td:first-child {
-  font-weight: bold;
-}
-    </style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-left: 200px;
+    }
+
+    .ginfo {
+      background-color: rgb(77, 240, 186);
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: normal;
+    }
+
+    td:first-child {
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="sidebar">
-		<h2><a href="Index.html"> Menu </a></h2>
-		<ul>
-			<li><a href="#">Rooms</a></li>
-			<li><a href="#">Tenants</a></li>
-            <li><a href="newapplications.html">New Applications</a></li>
-			<li><a href="wardeninformation.html">Warden Information</a></li>
-			<li><a href="#">Complaints</a></li>
-			<li><button id="logout-btn" onclick="logOut()">Log Out</button></li>
-		</ul>
-	</div>
+  <div class="sidebar">
+    <h2><a href="Index.html"> Menu </a></h2>
+    <ul>
+      <li><a href="#">Rooms</a></li>
+      <li><a href="#">Tenants</a></li>
+      <li><a href="newapplications.html">New Applications</a></li>
+      <li><a href="wardeninformation.html">Warden Information</a></li>
+      <li><a href="#">Complaints</a></li>
+      <li><button id="logout-btn" onclick="logOut()">Log Out</button></li>
+    </ul>
+  </div>
 
-<button onclick="sortTableByDistance()">Sort by Distance</button>
+  <button onclick="sortTableByDistance()">Sort by Distance</button>
 
 
-<div class="card7">
+  <div class="card7">
     <div class="card-header">
       Applicant Information
     </div>
     <div class="card-body">
       <table id="card8">
-    <tr>
-      <th colspan="15">Applicant Information</th>
-      
-      <th colspan="6" class="Ginfo">Guardian Information</th>
-    </tr>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Course</th>
-      <th>Sex</th>
-      <th>Aadhar</th>
-      <th>Address</th>
-      <th>Contact</th>
-      <th>Distance</th>
-      <th>Photo</th>
-      <th>Email</th>
-      <th>Medical Cert.</th>
-      <th>Bonified Cert.</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th>Name</th>
-      <th>Relation</th>
-      <th>Aadhar</th>
-      <th>Address</th>
-      <th>Contact</th>
-      <th>Email</th>
-      <th>Status</th>
-    </tr>
-    <tr>
-      <td id="applicant_id"></td>
-      <td id="applicant_Name"></td>
-      <td id="course_type"></td>
-      <td id="applicant_course"></td>
-      <td id="sex"></td>
-      <td id="aadhar"></td>
-      <td id="address"></td>
-      <td id="contact"></td>
-      <td id="distance"></td>
-      <td id="photo"></td>
-      <td id="email"></td>
-      <td id="medical_certificate"></td>
-      <td id="bonified_certificate"></td>
-      <td id="start_date"></td>
-      <td id="end_date"></td>
-      <td id="guardian_name"></td>
-      <td id="relation"></td>
-      <td id="guardian_aadhar"></td>
-      <td id="guardian_address"></td>
-      <td id="guardian_contact"></td>
-      <td id="guardian_email"></td>
-      
-    </tr>
-</table>
-</div>
-</div>
+        <tr>
+          <th colspan="15">Applicant Information</th>
 
-	
-    <script>
-// get the table element by ID
-var table = document.getElementById("card8");
+          <th colspan="6" class="Ginfo">Guardian Information</th>
+        </tr>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Course</th>
+          <th>Sex</th>
+          <th>Aadhar</th>
+          <th>Address</th>
+          <th>Contact</th>
+          <th>Distance</th>
+          <th>Photo</th>
+          <th>Email</th>
+          <th>Medical Cert.</th>
+          <th>Bonified Cert.</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Name</th>
+          <th>Relation</th>
+          <th>Aadhar</th>
+          <th>Address</th>
+          <th>Contact</th>
+          <th>Email</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td id="applicant_id"></td>
+          <td id="applicant_Name"></td>
+          <td id="course_type"></td>
+          <td id="applicant_course"></td>
+          <td id="sex"></td>
+          <td id="aadhar"></td>
+          <td id="address"></td>
+          <td id="contact"></td>
+          <td id="distance"></td>
+          <td id="photo"></td>
+          <td id="email"></td>
+          <td id="medical_certificate"></td>
+          <td id="bonified_certificate"></td>
+          <td id="start_date"></td>
+          <td id="end_date"></td>
+          <td id="guardian_name"></td>
+          <td id="relation"></td>
+          <td id="guardian_aadhar"></td>
+          <td id="guardian_address"></td>
+          <td id="guardian_contact"></td>
+          <td id="guardian_email"></td>
 
-// create an array of dummy data objects
-var dummyData = [
-  {
-    applicant_id: "1001",
-    applicant_Name: "John Doe",
-    course_type: "Online",
-    applicant_course: "Web Development",
-    sex: "Male",
-    aadhar: "1234 5678 9012",
-    address: "123 Main St",
-    contact: "555-555-1234",
-    distance: "100",
-    photo: "https://via.placeholder.com/150",
-    email: "john.doe@example.com",
-    medical_certificate: "Yes",
-    bonified_certificate: "No",
-    start_date: "2023-05-01",
-    end_date: "2023-11-30",
-    guardian_name: "Jane Doe",
-    relation: "Mother",
-    guardian_aadhar: "1111 2222 3333",
-    guardian_address: "456 Oak St",
-    guardian_contact: "555-555-5678",
-    guardian_email: "jane.doe@example.com",
-    
-
-  },
-  {
-    applicant_id: "1002",
-    applicant_Name: "Jane Smith",
-    course_type: "In-person",
-    applicant_course: "Graphic Design",
-    sex: "Female",
-    aadhar: "4567 8901 2345",
-    address: "456 Elm St",
-    contact: "555-555-5678",
-    distance: "500",
-    photo: "https://via.placeholder.com/150",
-    email: "jane.smith@example.com",
-    medical_certificate: "No",
-    bonified_certificate: "Yes",
-    start_date: "2023-06-01",
-    end_date: "2023-12-31",
-    guardian_name: "John Smith",
-    relation: "Father",
-    guardian_aadhar: "4444 5555 6666",
-    guardian_address: "789 Maple St",
-    guardian_contact: "555-555-9012",
-    guardian_email: "john.smith@example.com",
-  },
-  // add more dummy data here if desired
-];
-
-// iterate over the dummy data and create a new row for each object
-for (var i = 0; i < dummyData.length; i++) {
-  // create a new row for the current object
-  var row = table.insertRow(-1);
-
-  // create cells for each field in the row
-  var idCell = row.insertCell(0);
-  var nameCell = row.insertCell(1);
-  var typeCell = row.insertCell(2);
-  var courseCell = row.insertCell(3);
-  var sexCell = row.insertCell(4);
-  var aadharCell = row.insertCell(5);
-  var addressCell = row.insertCell(6);
-  var contactCell = row.insertCell(7);
-  var distanceCell = row.insertCell(8);
-  var photoCell = row.insertCell(9);
-  var emailCell = row.insertCell(10);
-  var medicalCell = row.insertCell(11);
-  var bonifiedCell = row.insertCell(12);
-  var startCell = row.insertCell(13);
-  var endCell = row.insertCell(14);
-  var guardianNameCell = row.insertCell(15);
-  var relationCell = row.insertCell(16);
-  var guardianAadharCell = row.insertCell(17);
-  var guardianAddressCell = row.insertCell(18);
-  var guardianContactCell = row.insertCell(19);
-  var guardianEmailCell = row.insertCell(20);
- 
-
-  // add the data from the current object to the cells
-  idCell.innerHTML = dummyData[i].applicant_id;
-  nameCell.innerHTML = dummyData[i].applicant_Name;
-  typeCell.innerHTML = dummyData[i].course_type;
-  courseCell.innerHTML = dummyData[i].applicant_course;
-  sexCell.innerHTML = dummyData[i].sex;
-  aadharCell.innerHTML = dummyData[i].aadhar;
-  addressCell.innerHTML = dummyData[i].address;
-  contactCell.innerHTML = dummyData[i].contact;
-  distanceCell.innerHTML = dummyData[i].distance;
-  photoCell.innerHTML = '<img src="' + dummyData[i].photo + '">';
-  emailCell.innerHTML = dummyData[i].email;
-  medicalCell.innerHTML = dummyData[i].medical_certificate;
-  bonifiedCell.innerHTML = dummyData[i].bonified_certificate;
-  startCell.innerHTML = dummyData[i].start_date;
-  endCell.innerHTML = dummyData[i].end_date;
-  guardianNameCell.innerHTML = dummyData[i].guardian_name;
-  relationCell.innerHTML = dummyData[i].relation;
-  guardianAadharCell.innerHTML = dummyData[i].guardian_aadhar;
-  guardianAddressCell.innerHTML = dummyData[i].guardian_address;
-  guardianContactCell.innerHTML = dummyData[i].guardian_contact;
-  guardianEmailCell.innerHTML = dummyData[i].guardian_email;
-  
-}
-
-function sortTableByDistance() {
-  var table = document.getElementById("card8");
-  var rows = table.rows;
-
-  // create an array to store the table rows
-  var arr = [];
-  for (var i = 1; i < rows.length; i++) {
-    arr.push(rows[i]);
-  }
-
-  // sort the array based on the distance value in each row in descending order
-  arr.sort(function(a, b) {
-    var aDist = parseInt(a.cells[8].innerHTML);
-    var bDist = parseInt(b.cells[8].innerHTML);
-    return bDist - aDist;
-  });
-
-  // remove existing rows from the table and add the sorted rows back in
-  for (var i = 0; i < arr.length; i++) {
-    table.appendChild(arr[i]);
-  }
-}
+        </tr>
+      </table>
+    </div>
+  </div>
 
 
-function addButtonsToTable() {
-  var table = document.getElementById("card8");
-  var rows = table.rows;
+  <script>
+    // get the table element by ID
+    var table = document.getElementById("card8");
 
-  for (var i = 3; i < rows.length; i++) {
-    var cell = rows[i].insertCell(-1);
-    var Approved = document.createElement("button");
-    Approved.textContent = "Approve";
-    Approved.onclick = function() {
-      var applicationId = this.parentNode.parentNode.cells[0].textContent;
-      var value = "Approved";
-      var url = "https://";
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
-    };
-    
-    var rejected = document.createElement("button");
-    rejected.textContent = "Reject";
-    rejected.onclick = function() {
-      var applicationId = this.parentNode.parentNode.cells[0].textContent;
-      var value = "Rejected";
-      var url = "https://";
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
-    };
-    
-    cell.appendChild(Approved);
-    cell.appendChild(rejected);
-  }
-}
+    // create an array of dummy data objects
+    let dummyData = []
+    fetch('http://127.0.0.1:8080/api/applicant/getAllApplicant', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
 
-addButtonsToTable();
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      // iterate over the dummy data and create a new row for each object
+    for (var i = 0; i < dummyData.length; i++) {
+      // create a new row for the current object
+      var row = table.insertRow(-1);
+
+      // create cells for each field in the row
+      var idCell = row.insertCell(0);
+      var nameCell = row.insertCell(1);
+      var typeCell = row.insertCell(2);
+      var courseCell = row.insertCell(3);
+      var sexCell = row.insertCell(4);
+      var aadharCell = row.insertCell(5);
+      var addressCell = row.insertCell(6);
+      var contactCell = row.insertCell(7);
+      var distanceCell = row.insertCell(8);
+      var photoCell = row.insertCell(9);
+      var emailCell = row.insertCell(10);
+      var medicalCell = row.insertCell(11);
+      var bonifiedCell = row.insertCell(12);
+      var startCell = row.insertCell(13);
+      var endCell = row.insertCell(14);
+      var guardianNameCell = row.insertCell(15);
+      var relationCell = row.insertCell(16);
+      var guardianAadharCell = row.insertCell(17);
+      var guardianAddressCell = row.insertCell(18);
+      var guardianContactCell = row.insertCell(19);
+      var guardianEmailCell = row.insertCell(20);
 
 
-    </script>
+      // add the data from the current object to the cells
+      idCell.innerHTML = dummyData[i].applicant_id;
+      nameCell.innerHTML = dummyData[i].applicant_name;
+      typeCell.innerHTML = dummyData[i].course_type;
+      courseCell.innerHTML = dummyData[i].applicant_course;
+      sexCell.innerHTML = dummyData[i].sex;
+      aadharCell.innerHTML = dummyData[i].aadhar;
+      addressCell.innerHTML = dummyData[i].address;
+      contactCell.innerHTML = dummyData[i].contact;
+      distanceCell.innerHTML = dummyData[i].distance;
+      photoCell.innerHTML = '<img src="' + dummyData[i].photo + '">';
+      emailCell.innerHTML = dummyData[i].email;
+      medicalCell.innerHTML = dummyData[i].medical_certificate;
+      bonifiedCell.innerHTML = dummyData[i].bonified_certificate;
+      startCell.innerHTML = dummyData[i].start_date;
+      endCell.innerHTML = dummyData[i].end_date;
+      guardianNameCell.innerHTML = dummyData[i].guardian_name;
+      relationCell.innerHTML = dummyData[i].relation;
+      guardianAadharCell.innerHTML = dummyData[i].guardian_aadhar;
+      guardianAddressCell.innerHTML = dummyData[i].guardian_address;
+      guardianContactCell.innerHTML = dummyData[i].guardian_contact;
+      guardianEmailCell.innerHTML = dummyData[i].guardian_email;
+
+    }
+    })
+      .catch(error => {
+
+      });
+
+    function sortTableByDistance() {
+      var table = document.getElementById("card8");
+      var rows = table.rows;
+
+      // create an array to store the table rows
+      var arr = [];
+      for (var i = 1; i < rows.length; i++) {
+        arr.push(rows[i]);
+      }
+
+      // sort the array based on the distance value in each row in descending order
+      arr.sort(function (a, b) {
+        var aDist = parseInt(a.cells[8].innerHTML);
+        var bDist = parseInt(b.cells[8].innerHTML);
+        return bDist - aDist;
+      });
+
+      // remove existing rows from the table and add the sorted rows back in
+      for (var i = 0; i < arr.length; i++) {
+        table.appendChild(arr[i]);
+      }
+    }
+
+
+    function addButtonsToTable() {
+      var table = document.getElementById("card8");
+      var rows = table.rows;
+
+      for (var i = 3; i < rows.length; i++) {
+        var cell = rows[i].insertCell(-1);
+        var Approved = document.createElement("button");
+        Approved.textContent = "Approve";
+        Approved.onclick = function () {
+          var applicationId = this.parentNode.parentNode.cells[0].textContent;
+          var value = "Approved";
+          var url = "https://";
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", url, true);
+          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
+        };
+
+        var rejected = document.createElement("button");
+        rejected.textContent = "Reject";
+        rejected.onclick = function () {
+          var applicationId = this.parentNode.parentNode.cells[0].textContent;
+          var value = "Rejected";
+          var url = "https://";
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", url, true);
+          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
+        };
+
+        cell.appendChild(Approved);
+        cell.appendChild(rejected);
+      }
+    }
+
+    addButtonsToTable();
+
+
+  </script>
 </body>
+
 </html>

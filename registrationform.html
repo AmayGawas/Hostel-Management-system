@@ -132,7 +132,7 @@ input[type="file"] {
     </div>
     <div class="form-group">
       <label for="email-input">email:</label>
-      <input type="email" id="email-input" name="email" pattern="" required>
+      <input type="email" id="email-input" name="email" required>
     </div>
    
     <div class="form-group">
@@ -199,59 +199,68 @@ input[type="file"] {
     </div>
    
   </form>
-  
+  <button class="button1"  id="apply-buttons">Apply</button>
 </div>
       <script>
-document.querySelector('#apply-button').addEventListener('click', () => {
+document.querySelector('#apply-buttons').addEventListener('click', () => {
   // Get form data
-  const name = document.querySelector('#name-input').value;
-  const gender = document.querySelector('#gender-input').value;
-  const stay = document.querySelector('#stay-input').value;
-  const contact = document.querySelector('#contact-input').value;
-  const photo = document.querySelector('#photo-input').files[0];
-  const idType = document.querySelector('#id-type-input').value;
-  const idNumber = document.querySelector('#id-number-input').value;
-  const startdate = document.querySelector('#start-date').value;
-  const enddate = document.querySelector('#end-date').value;
-  const address= document.querySelector('#address',address).value;
-  const email= document.querySelector('#email-input',address).value;
-  const courseType= document.querySelector('#course-type-input',courseType).value;
-  const gname=document.querySelector('#gname',gname).value;
-  const grelation=document.querySelector('#grelation-input',grelation).value;
-  const gaddress=document.querySelector('#gaddress-input',gaddress).value;
-  const gidNumber=document.querySelector('#gid-number-input',gidNumber).value;
-  const gcontact=document.querySelector('#gcontact-input',gcontact).value;
-  const fitness = document.querySelector('#fitness-input').files[0];
-  const bonafied = document.querySelector('#bonafied-input').files[0];
-  const distance = document.querySelector('#distance',distance).value;
-  // Create form data object
-  const formData = new FormData();
-  formData.append('name', name);
-  formData.append('gender', gender);
-  formData.append('stay', stay);
-  formData.append('contact', contact);
-  formData.append('photo', photo);
-  formData.append('course', idType);
-  formData.append('idNumber', idNumber);
-  formData.append('startdate',startdate);
-  formData.append('enddate',enddate);
-  formData.append('address',address);
-  formData.append('email',email);
-  formData.append('coursetype',courseType);
-  formData.append('gname',gname);
-  formData.append('grelation',grelation);
-  formData.append('gaddress',gaddress);
-  formData.append('gidNumber', gidNumber);
-  formData.append('gcontact', gcontact);
-  formData.append('fitness', fitness);
-  formData.append('bonafied', bonafied);
-  formData.append('distance',distance);
+  const name = document.querySelector('#name-input')?.value;
+  const gender = document.querySelector('#gender-input')?.value;
+  const stay = document.querySelector('#stay-input')?.value;
+  const contact = document.querySelector('#contact-input')?.value;
+  const photo = document.querySelector('#photo-input')?.files[0];
+  const idType = document.querySelector('#id-type-input')?.value;
+  const idNumber = document.querySelector('#id-number-input')?.value;
+  const startdate = document.querySelector('#start-date')?.value;
+  const enddate = document.querySelector('#end-date')?.value;
+  const address= document.querySelector('#address')?.value;
+  const email= document.querySelector('#email-input')?.value;
+  const courseType= document.querySelector('#course-type-input')?.value;
+  const gname=document.querySelector('#gname')?.value;
+  const grelation=document.querySelector('#grelation-input')?.value;
+  const gaddress=document.querySelector('#gaurdian-address')?.value;
+  const gidNumber=document.querySelector('#gid-number-input')?.value;
+  const gcontact=document.querySelector('#gcontact-input')?.value;
+  const fitness = document.querySelector('#fitness-input')?.files[0];
+  const bonafied = document.querySelector('#bonafied-input')?.files[0];
+  const distance = document.querySelector('#distance')?.value;
+  const courseName = document.querySelector('#course-name')?.value;
+  
+  let formData2={
+            applicant_name:name ,
+            course_type:courseType ,
+            applicant_course:courseName ,
+            sex:gender ,
+            aadhar:idNumber ,
+            address:address ,
+            contact:contact ,
+            distance:distance ,
+            photo:null ,
+            email:email ,
+            medical_certificate:null,
+            bonified_certificate:null,
+            start_date:startdate,
+            end_date:enddate,
+            guardian_name:gname ,
+            relation:grelation , 
+            guardian_aadhar:gidNumber , 
+            guardian_address:gaddress , 
+            guardian_contact:gcontact , 
+            guardian_email:null ,
+            application_status:null
+  }
   // Make HTTP POST request
-  fetch('/', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => {
+  fetch('http://127.0.0.1:8080/api/applicant/createApplicant', {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(formData2), // body data type must match "Content-Type" header
+  }).then(response => {
     if (response.ok) {
         
       // Display success message
@@ -259,15 +268,15 @@ document.querySelector('#apply-button').addEventListener('click', () => {
       // Reset form
       document.querySelector('#registration-form').reset();
       // Redirect to home page
-      window.location.href = 'Index1.html';
+      //window.location.href = 'Index1.html';
     } else {
       // Display error message
-      alert('Error submitting form.');
+ 
     }
   })
   .catch(error => {
     // Display error message
-    alert('Error submitting form.');
+   
   });
 });
       </script>
