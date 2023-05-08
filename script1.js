@@ -14,11 +14,7 @@ form.addEventListener('submit', e => {
     showSuccess(emailInput);
   }
 
-  if(passwordValue === '') {
-    showError(passwordInput, 'Password is required');
-  } else {
-    showSuccess(passwordInput);
-  }
+ 
 
   // Submit form if there are no errors
   if(!document.querySelector('.error')) {
@@ -61,11 +57,16 @@ function hideError(input) {
 function login() {
     // Get user input from login form
     const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const OTP=document.getElementById("OPT").value;
+    
   
     // Validate user input
-    if (email === "" || password === "") {
-      alert("Please enter your email and password.");
+    if (email === "" ) {
+      alert("Please enter your email .");
+      return false;
+    }
+    if (OTP === "" ) {
+      alert("Please enter OTP .");
       return false;
     }
   
