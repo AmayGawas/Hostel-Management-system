@@ -325,26 +325,115 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const pgmr=dummyData;
+      const pgmr=dummyData[0].vacancy;
 
       vacantpgmenroomElement.textContent=pgmr;
     })
       .catch(error => {
         console.log("Error occured ", error)
       });
-
-
-
-      
-      const phdmr='22';
-      const pgwmr='02';
-      const phdwmr='05';
-
-      
-      vacantpgwomenroomElement.textContent=phdmr;
-      vacantphdmenroomElement.textContent=pgmr;
-      vacantphdwomenroomElement.textContent=phdmr;
     }
+//phdmaleroom
+function updateHostelVacancy(){
+      fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Men_PhD/', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const phdmr=dummyData[0].vacancy;
+
+      vacantpgmenroomElement.textContent=phdmr;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+}
+//phdmaleroomend
+
+//pgwomenroom
+function updateHostelVacancy(){
+      fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Men_PhD/', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const pgwmr=dummyData[0].vacancy;
+
+      
+      vacantphdmenroomElement.textContent=pgwmr;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+    }
+//pgwomenroom
+
+//phdwoenroom
+function updateHostelVacancy(){
+      fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Men_PhD/', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const phdwmr=dummyData[0].vacancy;
+
+      
+      vacantphdmenroomElement.textContent=phdwmr;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+//phdwomenroom
+      
+     
+ }
+ 
 
     function  updateHostelFess(){
       const semfee ='Rs 3000';
