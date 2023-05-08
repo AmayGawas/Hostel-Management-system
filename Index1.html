@@ -325,8 +325,8 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const pgmr=dummyData;
-
+      const pgmr=dummyData[0].vacancy;
+      console.log(dummyData[0].vacancy)
       vacantpgmenroomElement.textContent=pgmr;
     })
       .catch(error => {
@@ -342,8 +342,8 @@ function updateMessCharges() {
 
       
       vacantpgwomenroomElement.textContent=phdmr;
-      vacantphdmenroomElement.textContent=pgmr;
-      vacantphdwomenroomElement.textContent=phdmr;
+      vacantphdmenroomElement.textContent=pgwmr;
+      vacantphdwomenroomElement.textContent=phdwmr;
     }
 
     function  updateHostelFess(){
