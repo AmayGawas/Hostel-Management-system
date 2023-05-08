@@ -283,7 +283,28 @@ tr:nth-child(even) {
   const mfpdElement= document.getElementById('mfpd');
   // Function to update the numbers on the cards
 function updateNumbers() {
-  obj
+  let dummyData = []
+    fetch('http://127.0.0.1:8080/api/applicant/getAllApplicant', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+
   const semfee ='Rs 3000';
   const fivedveg = 'Rs 9,350'; // Example number, replace with actual value from server
   const sevendveg = 'Rs 11,350'; // Example number, replace with actual value from server
@@ -314,8 +335,11 @@ function updateNumbers() {
   vacantphdwomenroomElement.textContent=phdmr;
   staychargeElement.textContent=accommodation_fee_per_day;
   mfpdElement.textContent=mfpd;
+    })
+      .catch(error => {
 
-}
+      });
+    }
 
 // Call the function initially to set the numbers on page load
 updateNumbers();
