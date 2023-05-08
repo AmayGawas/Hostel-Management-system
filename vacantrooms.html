@@ -59,28 +59,21 @@ tr:nth-child(even) {
     
 </head>
 <body>
-    <div class="sidebar">
+  <div class="sidebar">
 		<h2><a href="Index.html"> Menu </a></h2>
 		<ul>
-			<li><a href="#">Rooms</a></li>
-			<li><a href="#">Tenants</a></li>
+			<li><a href="vacantrooms.html">Allocate Rooms</a></li>
+			<li><a href="allresidents.html">Hostalites</a></li>
             <li><a href="newapplications.html">New Applications</a></li>
-			<li><a href="wardeninformation.html">Warden Information</a></li>
+			<li><a href="wardeninformation.html">View profile</a></li>
 			<li><a href="#">Complaints</a></li>
 			<li><button id="logout-btn" onclick="logOut()">Log Out</button></li>
 		</ul>
 	</div>
 	<div class="main">
-		<h1>Welcome to the Admin Dashboard</h1>
-		<div class="cards">
-			<div class="card">
-				<h2>Available Vacancies</h2>
-				<p id="vacant-rooms">0</p>
-			</div>
-			
-	</div>
-    <br>
-    <br>
+
+
+   
 
     <table id="applicants">
         <thead>
@@ -130,11 +123,12 @@ for (let i = 0; i < data.length; i++) {
   paymentID.innerHTML = data[i].payment_id;
 
   function createMessDropdown() {
-  const options = ["5 days veg", "7 days veg", "5 days non-veg", "7 days non-veg", "none"];
+  const options = ["5-days veg", "7-days veg", "5-days non-veg", "7-days non-veg", "none"];
+  const value=["5_days_veg", "7_days_veg", "5_days_nonveg", "7_days_nonveg", "none"];
   const select = document.createElement("select");
   for (let i = 0; i < options.length; i++) {
     const option = document.createElement("option");
-    option.value = options[i];
+    option.value = value[i];
     option.text = options[i];
     select.appendChild(option);
   }

@@ -24,7 +24,7 @@ updateNumbers();
 function logOut() {
     // Perform any necessary actions to log out the user, such as deleting the session or clearing local storage
     // Redirect the user to the login page
-    window.location.href = "login.html"; // Replace with the actual URL of the login page
+    window.location.href = "Index1.html"; // Replace with the actual URL of the login page
   }
   
   // Add an event listener to the logout button
