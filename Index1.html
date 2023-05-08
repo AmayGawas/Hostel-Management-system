@@ -178,7 +178,7 @@ tr:nth-child(even) {
 <body>
 <header class="header">
     <a href="#" class="logo">Goa university hostel</a>
-    <a class="login" href="login.html" class="login-link"> Admin LogIn</a>
+    <a class="login" href="login.html" class="login-link"> Warden LogIn</a>
     <a class="login2" href="studentlogin.html" class="login-link"> Student LogIn</a>
 </header>
 
@@ -253,7 +253,7 @@ tr:nth-child(even) {
         <h2>Temporary Stay Available</h2>
         <p>Cost of stay per day: <span id="staycharge">0</span>.</p>
         
-        <p>Mess fee per day: <span id="mfpd">  0</span>.</p>
+        <p>veg/non-veg Mess fee per day: <span id="1dveg">0</span>/<span id="1dnveg">0</span>.</p>
         <p>For temporary stay of more than 22 days, paying mess fee is compulsory!</p>
     </div>
     <div class="card">
@@ -269,6 +269,8 @@ tr:nth-child(even) {
 <script>
   const semfeeElement = document.getElementById('semfee');
   const fivedvegElement = document.getElementById('5dveg');
+  const onedvegElement = document.getElementById('1dveg');
+  const onednvegElement = document.getElementById('1dnveg');
   const sevendvegElemnet = document.getElementById('7dveg');
   const fivednvegElement = document.getElementById('5dnveg');
   const sevendnvegElemnet = document.getElementById('7dnveg');
@@ -280,27 +282,179 @@ tr:nth-child(even) {
   const vacantpgwomenroomElement= document.getElementById('vacantpgwomenroom');
   const vacantphdwomenroomElement= document.getElementById('vacantphdwomenroom');
   const staychargeElement= document.getElementById('staycharge');
-  const mfpdElement= document.getElementById('mfpd');
   // Function to update the numbers on the cards
 function updateMessCharges() {
-  const fivedveg = 'Rs 9,350'; // Example number, replace with actual value from server
-  const sevendveg = 'Rs 11,350'; // Example number, replace with actual value from server
-  const fivednveg = 'Rs 12,300'; // Example number, replace with actual value from server
-  const sevendnveg= 'Rs 16,500';
-  const onebreakfast= 'Rs 30';
-  const vld='Rs 55';
-  const nvld='Rs 65';
-  const mfpd='Rs 148';
-  
-  // Update the numbers on the cards
-  fivedvegElement.textContent = fivedveg;
-  sevendvegElemnet.textContent = sevendveg;
-  fivednvegElement.textContent= fivednveg;
-  sevendnvegElemnet.textContent = sevendnveg;
-  onebreakfastElement.textContent = onebreakfast;
-  vldElement.textContent = vld;
-  nvldElement.textContent =nvld;
-  mfpdElement.textContent=mfpd;
+
+  fetch('http://127.0.0.1:8080/api/mess/getMessPackageFee', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const fivedveg=dummyData[0].final_messFeeVegFiveDay;
+      const sevendveg=dummyData[0].final_messFeeVegSevenDay;
+      const fivednveg=dummyData[0].final_messFeeNonVegFiveDay;
+      const sevendnveg=dummyData[0].final_messFeeNonVegSevenDay;
+      
+      fivedvegElement.textContent = fivedveg;
+      sevendvegElemnet.textContent = sevendveg;
+      fivednvegElement.textContent= fivednveg;
+      sevendnvegElemnet.textContent = sevendnveg;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+
+      fetch('http://127.0.0.1:8080/api/mess/getMessFeePerMeal/breakfast/', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const onebreakfast=dummyData[0].messFee;
+      onebreakfastElement.textContent = onebreakfast;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+      fetch('http://127.0.0.1:8080/api/mess/getMessFeePerMeal/veg_lunch', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const vld=dummyData[0].messFee;
+      vldElement.textContent = vld;
+      
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+      fetch('http://127.0.0.1:8080/api/mess/getMessFeePerMeal/nonveg_lunch/', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const nvld=dummyData[0].messFee;
+      nvldElement.textContent =nvld;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+      fetch('http://127.0.0.1:8080/api/mess/getMessFeePerDay/5_day_veg', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const onedveg=dummyData[0].messFeeVeg;
+      onedvegElement.textContent=onedveg;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+      fetch('http://127.0.0.1:8080/api/mess/getMessFeePerDay/5_day_nonveg', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const onednveg=dummyData[0].messFeeVeg;
+      onednvegElement.textContent=onednveg;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      }); 
     
     }
 
@@ -332,9 +486,9 @@ function updateMessCharges() {
       .catch(error => {
         console.log("Error occured ", error)
       });
-    }
-//phdmaleroom
-function updateHostelVacancy(){
+
+
+
       fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Men_PhD/', {
       method: "get", // *GET, POST, PUT, DELETE, etc.
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -363,12 +517,8 @@ function updateHostelVacancy(){
         console.log("Error occured ", error)
       });
 
-}
-//phdmaleroomend
 
-//pgwomenroom
-function updateHostelVacancy(){
-      fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Men_PhD/', {
+      fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Women_PG/', {
       method: "get", // *GET, POST, PUT, DELETE, etc.
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
@@ -396,12 +546,9 @@ function updateHostelVacancy(){
       .catch(error => {
         console.log("Error occured ", error)
       });
-    }
-//pgwomenroom
 
-//phdwoenroom
-function updateHostelVacancy(){
-      fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Men_PhD/', {
+
+      fetch('http://127.0.0.1:8080/api/hostel/getVacancy/Women_PhD/', {
       method: "get", // *GET, POST, PUT, DELETE, etc.
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
@@ -430,17 +577,68 @@ function updateHostelVacancy(){
         console.log("Error occured ", error)
       });
 //phdwomenroom
-      
-     
- }
+    }
  
 
     function  updateHostelFess(){
-      const semfee ='Rs 3000';
-      const accommodation_fee_per_day='Rs 75';
 
-      semfeeElement.textContent = semfee;
+      fetch('http://127.0.0.1:8080/api/hostel/getAccomodationFee/Men_PG/', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const semfee=dummyData[0].accommodation_fee_per_day;
+
+      semfeeElement.textContent = semfee*75*0.5;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+       
+
+      fetch('http://127.0.0.1:8080/api/hostel/getAccomodationFee/Men_PG/', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const accommodation_fee_per_day=dummyData[0].accommodation_fee_per_day;
+
       staychargeElement.textContent=accommodation_fee_per_day;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
     }
 
 function updateValues() {
