@@ -81,6 +81,7 @@ tr:nth-child(even) {
             <th>Applicant ID</th>
             <th>Applicant Name</th>
             <th>Payment ID</th>
+            <th>Payment Amount</th>
             <th>Allot Room</th>
             <th>Mess</th>
             <th>Action</th>
@@ -121,6 +122,9 @@ for (let i = 0; i < data.length; i++) {
   // Insert the payment ID
   const paymentID = row.insertCell(2);
   paymentID.innerHTML = data[i].payment_id;
+
+  const paymentAmt = row.insertCell(2);
+  paymentAmt.innerHTML = data[i].payment_amt;
 
   function createMessDropdown() {
   const options = ["5-days veg", "7-days veg", "5-days non-veg", "7-days non-veg", "none"];

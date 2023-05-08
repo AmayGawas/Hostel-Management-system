@@ -23,20 +23,142 @@
 		<h1>Warden Information</h1>
 		<div class="cards2">
 			<div class="card2">
-				<img src="warden-men.jpg" alt="Warden of Men Hostel">
-				<h2>John Doe</h2>
-				<p>Contact: 1234567890</p>
-				<p>Email: john.doe@hostel.com</p>
+				<img id="wardenphoto" src="warden-men.jpg" alt="Warden of Men Hostel">
+				<h2 id="wardenname">John Doe</h2>
+				<p id="wardencontact">Contact: 1234567890</p>
+				<p id="wardenemail">Email: john.doe@hostel.com</p>
 			</div>
-			<div class="card2">
-				<img src="warden-women.jpg" alt="Warden of Women Hostel">
-				<h2>Jane Doe</h2>
-				<p>Contact: 9876543210</p>
-				<p>Email: jane.doe@hostel.com</p>
-			</div>
+			
 		</div>
 	</div>
+<script>
+	  const wardenphotoelement = document.getElementById('wardenphoto');
+	  const wardennameelement = document.getElementById('wardenname');
+	  const wardencontactelement = document.getElementById('wardencontact');
+	  const wardenemailelement = document.getElementById('wardenemail');
 
+	  function updateinformation(){
+//update warden name
+
+fetch('/getCurrentWarden/john.doe@example.com', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const wardenname=dummyData[0].messFee;
+      wardennameelement.textContent = wardenname;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+//update warden name
+
+fetch('/getCurrentWarden/john.doe@example.com', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const wardenphoto=dummyData[0].messFee;
+      wardenphotoelement.textContent = wardenphoto;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+//warden photo
+
+
+//warden contact
+
+fetch('/getCurrentWarden/john.doe@example.com', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const wardencontact=dummyData[0].messFee;
+      wardencontactelement.textContent = wardencontact;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+
+	  fetch('/getCurrentWarden/john.doe@example.com', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const wardenemail=dummyData[0].messFee;
+      wardenemailelement.textContent = wardenemail;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+	  }
+	  updateinformation();
+
+</script>
     
 </body>
 </html>

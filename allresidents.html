@@ -58,43 +58,11 @@
                     <th>Bonified Certificate</th>
                     <th>Start Date</th>
                     <th>End Date</th>
-                    <th>Guardian Name</th>
-                    <th>Relation</th>
-                    <th>Guardian Aadhar</th>
-                    <th>Guardian Address</th>
-                    <th>Guardian Contact</th>
-                    <th>Guardian Email</th>
-                    <th>Application Status</th>
                     <th>Archive</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Undergraduate</td>
-                    <td>Bachelor of Science</td>
-                    <td>123</td>
-                    <td>Vegetarian</td>
-                    <td>ABC123XYZ</td>
-                    <td>Male</td>
-                    <td>1234567890123456</td>
-                    <td>123 Main St, Anytown, USA</td>
-                    <td>123-456-7890</td>
-                    <td><img src="https://example.com/photo.jpg" alt="Photo of John Doe"></td>
-                    <td>johndoe@example.com</td>
-                    <td>Fit to Attend</td>
-                    <td>Excellent</td>
-                    <td>2023-09-01</td>
-                    <td>2027-05-30</td>
-                    <td>Jane Doe</td>
-                    <td>Mother</td>
-                    <td>9876543210987654</td>
-                    <td>456 Oak St, Anytown, USA</td>
-                    <td>123-456-7890</td>
-                    <td>jane@example.com</td>
-                    <td>Pending</td>
-                    <td><button>Archive</button></td>
-                </tr>
+         
                 <!-- add more rows as needed -->
             </tbody>
         </table>
@@ -127,13 +95,7 @@ function addTableRow(resident) {
     <td>${resident.bonified_certificate}</td>
     <td>${resident.start_date}</td>
     <td>${resident.end_date}</td>
-    <td>${resident.guardian_name}</td>
-    <td>${resident.relation}</td>
-    <td>${resident.guardian_aadhar}</td>
-    <td>${resident.guardian_address}</td>
-    <td>${resident.guardian_contact}</td>
-    <td>${resident.guardian_email}</td>
-    <td>${resident.application_status}</td>
+   
     <td><button onclick="archiveResident(${resident.resident_id})">Archive</button></td>
   `;
 
