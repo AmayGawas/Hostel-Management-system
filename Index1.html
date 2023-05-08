@@ -326,12 +326,31 @@ function updateMessCharges() {
     }).then((responseJson) => {
       dummyData = responseJson;
       const pgmr=dummyData[0].vacancy;
+<<<<<<< HEAD
 
+=======
+      console.log(dummyData[0].vacancy)
+>>>>>>> 6201c4d3e9f73228107cd61e983aa37e8fed7ee5
       vacantpgmenroomElement.textContent=pgmr;
     })
       .catch(error => {
         console.log("Error occured ", error)
       });
+<<<<<<< HEAD
+=======
+
+
+
+      
+      const phdmr='22';
+      const pgwmr='02';
+      const phdwmr='05';
+
+      
+      vacantpgwomenroomElement.textContent=phdmr;
+      vacantphdmenroomElement.textContent=pgwmr;
+      vacantphdwomenroomElement.textContent=phdwmr;
+>>>>>>> 6201c4d3e9f73228107cd61e983aa37e8fed7ee5
     }
 //phdmaleroom
 function updateHostelVacancy(){
