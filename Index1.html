@@ -305,10 +305,11 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const fivedveg=dummyData[0].final_messFeeVegFiveDay;
-      const sevendveg=dummyData[0].final_messFeeVegSevenDay;
-      const fivednveg=dummyData[0].final_messFeeNonVegFiveDay;
-      const sevendnveg=dummyData[0].final_messFeeNonVegSevenDay;
+      console.log(dummyData,typeof(dummyData))
+      const fivedveg=dummyData.final_messFeeVegFiveDay;
+      const sevendveg=dummyData.final_messFeeVegSevenDay;
+      const fivednveg=dummyData.final_messFeeNonVegFiveDay;
+      const sevendnveg=dummyData.final_messFeeNonVegSevenDay;
       
       fivedvegElement.textContent = fivedveg;
       sevendvegElemnet.textContent = sevendveg;
@@ -340,7 +341,7 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const onebreakfast=dummyData[0].messFee;
+      const onebreakfast=dummyData.amt;
       onebreakfastElement.textContent = onebreakfast;
     })
       .catch(error => {
@@ -367,7 +368,7 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const vld=dummyData[0].messFee;
+      const vld=dummyData.amt;
       vldElement.textContent = vld;
       
     })
@@ -395,7 +396,7 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const nvld=dummyData[0].messFee;
+      const nvld=dummyData.amt;
       nvldElement.textContent =nvld;
     })
       .catch(error => {
@@ -422,7 +423,7 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const onedveg=dummyData[0].messFeeVeg;
+      const onedveg=dummyData.amt_per_day;
       onedvegElement.textContent=onedveg;
     })
       .catch(error => {
@@ -449,7 +450,7 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const onednveg=dummyData[0].messFeeVeg;
+      const onednveg=dummyData.amt_per_day;
       onednvegElement.textContent=onednveg;
     })
       .catch(error => {
@@ -480,7 +481,7 @@ function updateMessCharges() {
     }).then((responseJson) => {
       dummyData = responseJson;
       const pgmr=dummyData[0].vacancy;
-      console.log(dummyData[0].vacancy)
+      console.log(dummyData[0].vacancy, " hello")
       vacantpgmenroomElement.textContent=pgmr;
     })
       .catch(error => {
@@ -511,7 +512,7 @@ function updateMessCharges() {
       dummyData = responseJson;
       const phdmr=dummyData[0].vacancy;
 
-      vacantpgmenroomElement.textContent=phdmr;
+      vacantphdmenroomElement.textContent=phdmr;
     })
       .catch(error => {
         console.log("Error occured ", error)
@@ -541,7 +542,7 @@ function updateMessCharges() {
       const pgwmr=dummyData[0].vacancy;
 
       
-      vacantphdmenroomElement.textContent=pgwmr;
+      vacantpgwomenroomElement.textContent=pgwmr;
     })
       .catch(error => {
         console.log("Error occured ", error)
@@ -571,7 +572,7 @@ function updateMessCharges() {
       const phdwmr=dummyData[0].vacancy;
 
       
-      vacantphdmenroomElement.textContent=phdwmr;
+      vacantphdwomenroomElement.textContent=phdwmr;
     })
       .catch(error => {
         console.log("Error occured ", error)
@@ -602,9 +603,9 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const semfee=dummyData[0].accommodation_fee_per_day;
+      const semfee=dummyData.accommodation_fee_per_day;
 
-      semfeeElement.textContent = semfee*75*0.5;
+      semfeeElement.textContent = semfee*80 *0.5 ;
     })
       .catch(error => {
         console.log("Error occured ", error)
@@ -631,7 +632,7 @@ function updateMessCharges() {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const accommodation_fee_per_day=dummyData[0].accommodation_fee_per_day;
+      const accommodation_fee_per_day=dummyData.accommodation_fee_per_day;
 
       staychargeElement.textContent=accommodation_fee_per_day;
     })

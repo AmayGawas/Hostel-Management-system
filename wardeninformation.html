@@ -40,7 +40,7 @@
 	  function updateinformation(){
 //update warden name
 
-fetch('/getCurrentWarden/john.doe@example.com', {
+fetch('http://127.0.0.1:8080/api/warden/getVacancyBYWardenMail/john.doe@example.com', {
       method: "get", // *GET, POST, PUT, DELETE, etc.
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
@@ -60,8 +60,8 @@ fetch('/getCurrentWarden/john.doe@example.com', {
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const wardenname=dummyData[0].messFee;
-      wardennameelement.textContent = wardenname;
+      const num=dummyData[0].vacancy;
+      wardennameelement.textContent = num;
     })
       .catch(error => {
         console.log("Error occured ", error)

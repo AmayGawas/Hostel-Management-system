@@ -96,7 +96,7 @@
 		<form id="payment-form" enctype="multipart/form-data">
 
 			<label for="applicant_id">Application ID:</label>
-			<input type="text" id="applicant_id" name="applicant-id" placeholder="Enter Application ID" required>
+			<input type="number" id="applicant_id" name="applicant-id" placeholder="Enter Application ID" required>
 
 
 			<label for="payment_id">Transaction ID:</label>
@@ -110,6 +110,7 @@
 
 			<label for="receipt_file">Payment Receipt:</label>
 			<input type="file" id="receipt_file" name="receipt-photo" accept="image/*" required>
+			
 			<button class="button1" type="submit" id="apply-buttons">Submit Payment Details</button>
 			<!-- <input type="submit" value="Submit Payment Details" onclick="postPaymentDetails(event)"> -->
 		</form>
@@ -137,22 +138,25 @@
 		// });
 		document.querySelector('#apply-buttons').addEventListener('click', () => {
   // Get form data
-  const appli_id = document.querySelector('#application_id')?.value;
+  console.log("button clicked");
+  
+  const appli_id = document.querySelector('#applicant_id')?.value;
   const pay_id = document.querySelector('#payment_id')?.value;
   const description= document.querySelector('#payment_description')?.value;
   const amount = document.querySelector('#payment_amount')?.value;
-  const preciept = document.querySelector('#reciept_file')?.files[0];
+  const preciept = document.querySelector('#receipt_file')?.files[0];
   
   let formData1={
-	applicant_id:appli_id,
-	payment_id:pay_id,
-	payment_description:description,
-	payment_amt:amount,
-	reciept:preciept
+	applicant_id: appli_id,
+	payment_id: pay_id,
+	payment_description: description,
+	payment_amt: amount,
+	reciept: preciept
 
   }
+  console.log(formData1)
 // Make HTTP POST request
-fetch('http://127.0.0.1:8080/api/applicant/insertApplicantPaymentDetail', {
+fetch('http://127.0.0.1:8080/api/payment/insertApplicantPaymentDetail', {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
     headers: {
@@ -173,12 +177,12 @@ fetch('http://127.0.0.1:8080/api/applicant/insertApplicantPaymentDetail', {
       //window.location.href = 'Index1.html';
     } else {
       // Display error message
- 
+		console.log("err-or")
     }
   })
   .catch(error => {
     // Display error message
-   
+	console.log(error)
   });
 });
 

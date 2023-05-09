@@ -4,13 +4,39 @@ const pendingComplaintsElement = document.getElementById('pending-complaints');
 
 // Function to update the numbers on the cards
 function updateNumbers() {
-  // Get the number of vacant rooms, new applications, and pending complaints from the server
-  const vacantRooms = 10; // Example number, replace with actual value from server
+
+  fetch('http://127.0.0.1:8080/api/warden/getVacancyBYWardenMail/john.doe@example.com', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const vacantRooms=dummyData[0].vacancy;
+      vacantRoomsElement.textContent = vacantRooms;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+  
   const newApplications = 5; // Example number, replace with actual value from server
   const pendingComplaints = 2; // Example number, replace with actual value from server
   
   // Update the numbers on the cards
-  vacantRoomsElement.textContent = vacantRooms;
+  
   newApplicationsElement.textContent = newApplications;
   pendingComplaintsElement.textContent = pendingComplaints;
 }

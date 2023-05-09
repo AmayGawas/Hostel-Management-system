@@ -72,18 +72,21 @@ tr:nth-child(even) {
 	</div>
 	<div class="main">
 
+<h4>Vacant</h4>
+<p id="list">
 
+</p>
    
 
     <table id="applicants">
         <thead>
           <tr>
             <th>Applicant ID</th>
-            <th>Applicant Name</th>
+            <!-- <th>Applicant Name</th> -->
             <th>Payment ID</th>
             <th>Payment Amount</th>
             <th>Allot Room</th>
-            <th>Mess</th>
+            <!-- <th>Mess</th> -->
             <th>Action</th>
           </tr>
         </thead>
@@ -97,9 +100,9 @@ tr:nth-child(even) {
 
 
 
-const wardenID = getWardenID();
-// Get the hostel ID corresponding to the warden ID
-const hostelID = getHostelID(wardenID);
+// const wardenID = getWardenID();
+// // Get the hostel ID corresponding to the warden ID
+// const hostelID = getHostelID(wardenID);
 
 // Get the list of vacant rooms from the hostel ID
 const vacantRooms = getVacantRooms(hostelID);
@@ -116,8 +119,8 @@ for (let i = 0; i < data.length; i++) {
   applicantID.innerHTML = data[i].applicant_id;
   
   // Insert the applicant name
-  const applicantName = row.insertCell(1);
-  applicantName.innerHTML = data[i].applicant_name;
+  // const applicantName = row.insertCell(1);
+  // applicantName.innerHTML = data[i].applicant_name;
   
   // Insert the payment ID
   const paymentID = row.insertCell(2);
@@ -126,18 +129,18 @@ for (let i = 0; i < data.length; i++) {
   const paymentAmt = row.insertCell(2);
   paymentAmt.innerHTML = data[i].payment_amt;
 
-  function createMessDropdown() {
-  const options = ["5-days veg", "7-days veg", "5-days non-veg", "7-days non-veg", "none"];
-  const value=["5_days_veg", "7_days_veg", "5_days_nonveg", "7_days_nonveg", "none"];
-  const select = document.createElement("select");
-  for (let i = 0; i < options.length; i++) {
-    const option = document.createElement("option");
-    option.value = value[i];
-    option.text = options[i];
-    select.appendChild(option);
-  }
-  return select;
-}
+//   function createMessDropdown() {
+//   const options = ["5-days veg", "7-days veg", "5-days non-veg", "7-days non-veg", "none"];
+//   const value=["5_days_veg", "7_days_veg", "5_days_nonveg", "7_days_nonveg", "none"];
+//   const select = document.createElement("select");
+//   for (let i = 0; i < options.length; i++) {
+//     const option = document.createElement("option");
+//     option.value = value[i];
+//     option.text = options[i];
+//     select.appendChild(option);
+//   }
+//   return select;
+// }
   
   // Insert the allot room dropdown
   const allotRoom = row.insertCell(3);
