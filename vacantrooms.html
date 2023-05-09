@@ -92,6 +92,14 @@ tr:nth-child(even) {
         </thead>
         <tbody></tbody>
       </table>
+      <p id="data"></p>
+      <div>
+        <label for="applicant-input">AplicantId:</label>
+      <input type="number" id="applicant-input" name="AplicantId" required>
+      <label for="room-input">Room No:</label>
+      <input type="number" id="room-input" name="Room_No" required>
+      <button class="button1" type="submit" id="allocate-buttons">Allocate</button>
+      </div>
     <script src="script.js"></script>
     <script src="script2.js"></script>
   </body>
@@ -99,107 +107,245 @@ tr:nth-child(even) {
     <script>
 
 
-
+const dataElement = document.getElementById('data');
+const roomDataElement = document.getElementById('list');
 // const wardenID = getWardenID();
 // // Get the hostel ID corresponding to the warden ID
 // const hostelID = getHostelID(wardenID);
 
 // Get the list of vacant rooms from the hostel ID
-const vacantRooms = getVacantRooms(hostelID);
+// const vacantRooms = getVacantRooms(hostelID);
 
-// Load data dynamically from the database and populate the table
-const table = document.getElementById("applicants");
+// var tableBody = document.querySelector('tbody');
+// function addTableRow(resident) {
+//   // Create a new row element
+//   var newRow = document.createElement('tr');
 
-// Create a new row for each applicant
-for (let i = 0; i < data.length; i++) {
-  const row = table.insertRow(i+1);
-  
-  // Insert the applicant ID
-  const applicantID = row.insertCell(0);
-  applicantID.innerHTML = data[i].applicant_id;
-  
-  // Insert the applicant name
-  // const applicantName = row.insertCell(1);
-  // applicantName.innerHTML = data[i].applicant_name;
-  
-  // Insert the payment ID
-  const paymentID = row.insertCell(2);
-  paymentID.innerHTML = data[i].payment_id;
+//   // Add the resident data to the row
+//   newRow.innerHTML = `
+//     <td>${resident.resident_id}</td>
+//     <td>${resident.payment_id}</td>
+//     <td>${resident.payment_amt}</td>
+//     <td></td>
+//     <td><button onclick="allocateRoom(${resident.resident_id},${input})">Archive</button></td>
+//   `;
 
-  const paymentAmt = row.insertCell(2);
-  paymentAmt.innerHTML = data[i].payment_amt;
-
-//   function createMessDropdown() {
-//   const options = ["5-days veg", "7-days veg", "5-days non-veg", "7-days non-veg", "none"];
-//   const value=["5_days_veg", "7_days_veg", "5_days_nonveg", "7_days_nonveg", "none"];
-//   const select = document.createElement("select");
-//   for (let i = 0; i < options.length; i++) {
-//     const option = document.createElement("option");
-//     option.value = value[i];
-//     option.text = options[i];
-//     select.appendChild(option);
-//   }
-//   return select;
+//   // Append the row to the table
+//   tableBody.appendChild(newRow);
 // }
-  
-  // Insert the allot room dropdown
-  const allotRoom = row.insertCell(3);
-  const dropdown = document.createElement("select");
-  
-  // Add options to the dropdown based on the vacant rooms
-  for (let j = 0; j < vacantRooms.length; j++) {
-    const option = document.createElement("option");
-    option.value = vacantRooms[j];
-    option.text = vacantRooms[j];
-    dropdown.appendChild(option);
-  }
-  
-  allotRoom.appendChild(dropdown);
-  
-  // Insert the Allot Room button
-  const allotButton = row.insertCell(4);
-  const button = document.createElement("button");
-  button.innerHTML = "Allot Room";
-  
-  // Add onclick function to allot the selected room to the applicant
-  button.onclick = function() {
-    const selectedRoom = dropdown.value;
-    const selectedMess = messSelect.value;
-    const applicantID = data[i].applicant_id;
-    
-    // Make a POST request to allot the room to the applicant
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/allot-room", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-        console.log(xhr.responseText);
 
-        
-        
-        // Remove the allotted room from the dropdown
-        for (let k = 0; k < dropdown.options.length; k++) {
-          if (dropdown.options[k].value === selectedRoom) {
-            dropdown.remove(k);
-            break;
-          }
+function loadResidents() {
+  // Make an API call to your backend to get the resident data from the database
+  // For example, you can use the fetch() method to make a GET request to an endpoint like /getResidents
+  // The API response should return a JSON array of resident objects
+ 
+
+    fetch('http://127.0.0.1:8080/api/warden/getAlllotRoomData', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
         }
-        
-        // Update the vacant rooms in the database
-        updateVacantRooms(hostelID, selectedRoom);
+      } else {
+        // Display error message
+        console.log("Error occured")
       }
-    };
-    
-    xhr.send(JSON.stringify({
-      applicantID: applicantID,
-      roomNumber: selectedRoom
-    }));
-  };
-  
-  allotButton.appendChild(button);
+    }).then((responseJson) => {
+      // residents = responseJson;
+      // residents.forEach(resident => {
+      //   addTableRow(resident);  })
+      dummyData = responseJson;
+      //const phdmr=dummyData[0].vacancy;
+
+      dataElement.textContent=dummyData;
+
+  })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
 }
 
-// dummy data
+function loadVacancies(){
+  
+  fetch('http://127.0.0.1:8080/api/warden/getAvailableRoom/1', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      // residents = responseJson;
+      // residents.forEach(resident => {
+      //   addTableRow(resident);  })
+      dummyData = responseJson;
+      //const phdmr=dummyData[0].vacancy;
+
+      roomDataElement.textContent=dummyData;
+
+  })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+}
+// Call the loadResidents() function to fetch and display the resident data in the table
+loadVacancies();
+loadResidents();
+
+
+document.querySelector('#allocate-buttons').addEventListener('click', () => {
+  // Get form data
+  const applicantId= document.querySelector('#applicant-input')?.value;
+  const roomNo = document.querySelector('#room-input')?.value;
+  let formData2={
+    applicant_id:applicantId ,
+    room_no:roomNo 
+  }
+  fetch('http://127.0.0.1:8080/api/', {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(formData2), // body data type must match "Content-Type" header
+  }).then(response => {
+    if (response.ok) {
+        
+      // Display success message
+      alert('Form submitted successfully!');
+      // Reset form
+      document.querySelector('#registration-form').reset();
+      // Redirect to home page
+      //window.location.href = 'Index1.html';
+    } else {
+      // Display error message
+ 
+    }
+  })
+  .catch(error => {
+    // Display error message
+   
+  });
+});
+
+
+
+
+// // Load data dynamically from the database and populate the table
+// const table = document.getElementById("applicants");
+
+// // Create a new row for each applicant
+// for (let i = 0; i < data.length; i++) {
+//   const row = table.insertRow(i+1);
+  
+//   // Insert the applicant ID
+//   const applicantID = row.insertCell(0);
+//   applicantID.innerHTML = data[i].applicant_id;
+  
+//   // Insert the applicant name
+//   // const applicantName = row.insertCell(1);
+//   // applicantName.innerHTML = data[i].applicant_name;
+  
+//   // Insert the payment ID
+//   const paymentID = row.insertCell(2);
+//   paymentID.innerHTML = data[i].payment_id;
+
+//   const paymentAmt = row.insertCell(2);
+//   paymentAmt.innerHTML = data[i].payment_amt;
+
+// //   function createMessDropdown() {
+// //   const options = ["5-days veg", "7-days veg", "5-days non-veg", "7-days non-veg", "none"];
+// //   const value=["5_days_veg", "7_days_veg", "5_days_nonveg", "7_days_nonveg", "none"];
+// //   const select = document.createElement("select");
+// //   for (let i = 0; i < options.length; i++) {
+// //     const option = document.createElement("option");
+// //     option.value = value[i];
+// //     option.text = options[i];
+// //     select.appendChild(option);
+// //   }
+// //   return select;
+// // }
+  
+//   // Insert the allot room dropdown
+//   const allotRoom = row.insertCell(3);
+//   const dropdown = document.createElement("select");
+  
+//   // Add options to the dropdown based on the vacant rooms
+//   for (let j = 0; j < vacantRooms.length; j++) {
+//     const option = document.createElement("option");
+//     option.value = vacantRooms[j];
+//     option.text = vacantRooms[j];
+//     dropdown.appendChild(option);
+//   }
+  
+//   allotRoom.appendChild(dropdown);
+  
+//   // Insert the Allot Room button
+//   const allotButton = row.insertCell(4);
+//   const button = document.createElement("button");
+//   button.innerHTML = "Allot Room";
+  
+//   // Add onclick function to allot the selected room to the applicant
+//   button.onclick = function() {
+//     const selectedRoom = dropdown.value;
+//     const selectedMess = messSelect.value;
+//     const applicantID = data[i].applicant_id;
+    
+//     // Make a POST request to allot the room to the applicant
+//     const xhr = new XMLHttpRequest();
+//     xhr.open("POST", "/allot-room", true);
+//     xhr.setRequestHeader("Content-Type", "application/json");
+//     xhr.onreadystatechange = function() {
+//       if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+//         console.log(xhr.responseText);
+
+        
+        
+//         // Remove the allotted room from the dropdown
+//         for (let k = 0; k < dropdown.options.length; k++) {
+//           if (dropdown.options[k].value === selectedRoom) {
+//             dropdown.remove(k);
+//             break;
+//           }
+//         }
+        
+//         // Update the vacant rooms in the database
+//         updateVacantRooms(hostelID, selectedRoom);
+//       }
+//     };
+    
+//     xhr.send(JSON.stringify({
+//       applicantID: applicantID,
+//       roomNumber: selectedRoom
+//     }));
+//   };
+  
+//   allotButton.appendChild(button);
+// }
+
+// // dummy data
 
     </script>
     
