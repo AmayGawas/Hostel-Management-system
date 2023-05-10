@@ -92,10 +92,10 @@ tr:nth-child(even) {
         </thead>
         <tbody></tbody>
       </table>
-      <p id="data"></p>
-      <div>
-        <label for="applicant-input">AplicantId:</label>
-      <input type="number" id="applicant-input" name="AplicantId" required>
+      <p id="data"> </p>
+      <div id="input">
+        <label for="applicant-input">ApplicantId:</label>
+      <input type="number" id="applicant-input" name="ApplicantId" required>
       <label for="room-input">Room No:</label>
       <input type="number" id="room-input" name="Room_No" required>
       <button class="button1" type="submit" id="allocate-buttons">Allocate</button>
@@ -162,7 +162,7 @@ function loadResidents() {
       // residents = responseJson;
       // residents.forEach(resident => {
       //   addTableRow(resident);  })
-      dummyData = responseJson;
+      dummyData = JSON.stringify(responseJson);
       //const phdmr=dummyData[0].vacancy;
 
       dataElement.textContent=dummyData;
@@ -197,7 +197,7 @@ function loadVacancies(){
       // residents = responseJson;
       // residents.forEach(resident => {
       //   addTableRow(resident);  })
-      dummyData = responseJson;
+      dummyData = JSON.stringify(responseJson);
       //const phdmr=dummyData[0].vacancy;
 
       roomDataElement.textContent=dummyData;
@@ -217,10 +217,11 @@ document.querySelector('#allocate-buttons').addEventListener('click', () => {
   const applicantId= document.querySelector('#applicant-input')?.value;
   const roomNo = document.querySelector('#room-input')?.value;
   let formData2={
-    applicant_id:applicantId ,
-    room_no:roomNo 
+    room_no:roomNo,
+    applicant_id:applicantId 
+     
   }
-  fetch('http://127.0.0.1:8080/api/', {
+  fetch('http://127.0.0.1:8080/api/warden/allocateRoom', {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
     headers: {
@@ -236,7 +237,7 @@ document.querySelector('#allocate-buttons').addEventListener('click', () => {
       // Display success message
       alert('Form submitted successfully!');
       // Reset form
-      document.querySelector('#registration-form').reset();
+      document.querySelector('#input').reset();
       // Redirect to home page
       //window.location.href = 'Index1.html';
     } else {

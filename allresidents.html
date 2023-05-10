@@ -38,15 +38,13 @@
 		</ul>
 	</div>
 	<div class="main">
-        <table>
+        <table  id="card8">
             <thead>
                 <tr>
                     <th>Applicant Name</th>
                     <th>Course Type</th>
                     <th>Applicant Course</th>
                     <th>Room No</th>
-                    <th>Mess Type</th>
-                    <th>Payment ID</th>
                     <th>Sex</th>
                     <th>Aadhar</th>
                     <th>Address</th>
@@ -60,6 +58,22 @@
                     <th>End Date</th>
                     <th>Archive</th>
                 </tr>
+                <tr>
+                  <td id="resident_Name"></td>
+                  <td id="course_type"></td>
+                  <td id="resident_course"></td>
+                  <td id="room_no"></td>
+                  <td id="sex"></td>
+                  <td id="aadhar"></td>
+                  <td id="address"></td>
+                  <td id="contact"></td>
+                  <td id="distance"></td>
+                  <td id="photo"></td>
+                  <td id="email"></td>
+                  <td id="medical_certificate"></td>
+                  <td id="bonified_certificate"></td>
+                  <td id="start_date"></td>
+                  <td id="end_date"></td>
             </thead>
             <tbody>
          
@@ -70,80 +84,132 @@
 	<script src="script2.js"></script>
     <script>
         // Get the table body element
-var tableBody = document.querySelector('tbody');
+// get the table element by ID
+var table = document.getElementById("card8");
 
-// Function to add a row to the table
-function addTableRow(resident) {
-  // Create a new row element
-  var newRow = document.createElement('tr');
+// create an array of dummy data objects
+let dummyData = []
+fetch('http://127.0.0.1:8080/api/applicant/getAllApplicant', {
+  method: "get", // *GET, POST, PUT, DELETE, etc.
+  cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+  headers: {
+    "Content-Type": "application/json",
+    // 'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  redirect: "follow", // manual, *follow, error
+  referrerPolicy: "no-referrer",
+}).then(response => {
+  if (response.ok) {
+    if (response.ok) {
+      return response.json();
+    }
+  } else {
+    // Display error message
 
-  // Add the resident data to the row
-  newRow.innerHTML = `
-    <td>${resident.applicant_name}</td>
-    <td>${resident.course_type}</td>
-    <td>${resident.applicant_course}</td>
-    <td>${resident.room_no}</td>
-    <td>${resident.mess_type}</td>
-    <td>${resident.payment_id}</td>
-    <td>${resident.sex}</td>
-    <td>${resident.aadhar}</td>
-    <td>${resident.address}</td>
-    <td>${resident.contact}</td>
-    <td><img src="${resident.photo}" alt="Photo of ${resident.applicant_name}"></td>
-    <td>${resident.email}</td>
-    <td>${resident.medical_certificate}</td>
-    <td>${resident.bonified_certificate}</td>
-    <td>${resident.start_date}</td>
-    <td>${resident.end_date}</td>
-   
-    <td><button onclick="archiveResident(${resident.resident_id})">Archive</button></td>
-  `;
+  }
+}).then((responseJson) => {
+  dummyData = responseJson;
+  // iterate over the dummy data and create a new row for each object
+for (var i = 0; i < dummyData.length; i++) {
+  // create a new row for the current object
+  var row = table.insertRow(-1);
 
-  // Append the row to the table
-  tableBody.appendChild(newRow);
+  // create cells for each field in the row
+  var idCell = row.insertCell(0);
+  var nameCell = row.insertCell(1);
+  var typeCell = row.insertCell(2);
+  var courseCell = row.insertCell(3);
+  var roomNoCell = row.insertCell(4);
+  var sexCell = row.insertCell(5);
+  var aadharCell = row.insertCell(6);
+  var addressCell = row.insertCell(7);
+  var contactCell = row.insertCell(8);
+  var distanceCell = row.insertCell(9);
+  var photoCell = row.insertCell(10);
+  var emailCell = row.insertCell(11);
+  var medicalCell = row.insertCell(12);
+  var bonifiedCell = row.insertCell(13);
+  var startCell = row.insertCell(14);
+  var endCell = row.insertCell(15);
+
+
+  // add the data from the current object to the cells
+  idCell.innerHTML = dummyData[i].hostel_resident_id;
+  nameCell.innerHTML = dummyData[i].hostel_resident_name;
+  typeCell.innerHTML = dummyData[i].course_type;
+  courseCell.innerHTML = dummyData[i].hostel_resident_course;
+  roomNoCell.innerHTML = dummyData[i].room_no;
+  sexCell.innerHTML = dummyData[i].sex;
+  aadharCell.innerHTML = dummyData[i].aadhar;
+  addressCell.innerHTML = dummyData[i].address;
+  contactCell.innerHTML = dummyData[i].contact;
+  distanceCell.innerHTML = dummyData[i].distance;
+  photoCell.innerHTML = '<img src="' + dummyData[i].photo + '">';
+  emailCell.innerHTML = dummyData[i].email;
+  medicalCell.innerHTML = dummyData[i].medical_certificate;
+  bonifiedCell.innerHTML = dummyData[i].bonified_certificate;
+  startCell.innerHTML = dummyData[i].start_date;
+  endCell.innerHTML = dummyData[i].end_date;
+  addButtonsToTable(i+2);
 }
+})
+  .catch(error => {
+    console.log(error);
+  });
 
+const  addButtonsToTable=(i)=> {
+    console.log(i);
+      var table = document.getElementById("card8");
+      var rows = table.rows;
+        var cell = rows[i].insertCell(-1);
+        var Approved = document.createElement("button");
+        Approved.textContent = "Archive";
+        var value="Archive";
+        var residentId = this.parentNode.parentNode.cells[0].textContent;
+        Approved.onclick = archiveResident (residentId,"Archive") 
+
+      }
 // Function to archive a resident
-function archiveResident(residentId) {
+function archiveResident(residentId,status) {
   // Make an API call to your backend to archive the resident data based on the resident_id
   // For example, you can use the fetch() method to make a POST request to an endpoint like /archiveResident with the resident_id as a parameter
   // Once the resident data is successfully archived, you can remove the corresponding row from the table using the remove() method
 
   // Get the row element for the resident and remove it from the table
-  var row = document.querySelector(`tr[data-resident-id="${residentId}"]`);
-  row.remove();
+  // var row = document.querySelector(`tr[data-resident-id="${residentId}"]`);
+  // row.remove();
 }
 
 // Function to fetch the resident data from the database and add it to the table
-function loadResidents() {
-  // Make an API call to your backend to get the resident data from the database
-  // For example, you can use the fetch() method to make a GET request to an endpoint like /getResidents
-  // The API response should return a JSON array of resident objects
-  fetch('/http://127.0.0.1:8080/api/warden/getAllResidents/',{
-    method: "get", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer",
-    })
-    .then(response => response.json())
-    .then(residents => {
-      // Loop through the residents and add them to the table
-      residents.forEach(resident => {
-        addTableRow(resident);
+// function loadResidents() {
+//   // Make an API call to your backend to get the resident data from the database
+//   // For example, you can use the fetch() method to make a GET request to an endpoint like /getResidents
+//   // The API response should return a JSON array of resident objects
+//   fetch('/http://127.0.0.1:8080/api/warden/getAllResidents/',{
+//     method: "get", // *GET, POST, PUT, DELETE, etc.
+//       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+//       headers: {
+//         "Content-Type": "application/json",
+//         // 'Content-Type': 'application/x-www-form-urlencoded',
+//       },
+//       redirect: "follow", // manual, *follow, error
+//       referrerPolicy: "no-referrer",
+//     })
+//     .then(response => response.json())
+//     .then(residents => {
+//       // Loop through the residents and add them to the table
+//       residents.forEach(resident => {
+//         addTableRow(resident);
 
-        // Add a data-resident-id attribute to the row for easy reference when archiving the resident
-        var row = tableBody.lastChild;
-        row.setAttribute('data-resident-id', resident.resident_id);
-      });
-    });
-}
+//         // Add a data-resident-id attribute to the row for easy reference when archiving the resident
+//         var row = tableBody.lastChild;
+//         row.setAttribute('data-resident-id', resident.resident_id);
+//       });
+//     });
+// }
 
-// Call the loadResidents() function to fetch and display the resident data in the table
-loadResidents();
+// // Call the loadResidents() function to fetch and display the resident data in the table
+// loadResidents();
 
 </script>
     
