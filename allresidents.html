@@ -156,19 +156,21 @@ for (var i = 0; i < dummyData.length; i++) {
   .catch(error => {
     console.log(error);
   });
+  
 
 const  addButtonsToTable=(i)=> {
     console.log(i);
       var table = document.getElementById("card8");
       var rows = table.rows;
         var cell = rows[i].insertCell(-1);
-        var Approved = document.createElement("button");
-        Approved.textContent = "Archive";
+        var Archive = document.createElement("button");
+        Archive.textContent = "Archive";
         var value="Archive";
         var residentId = this.parentNode.parentNode.cells[0].textContent;
-        Approved.onclick = archiveResident (residentId,"Archive") 
+        Archive.onclick = archiveResident (residentId,"Archive") 
 
       }
+      cell.appendChild(Archive);
 // Function to archive a resident
 function archiveResident(residentId,status) {
   // Make an API call to your backend to archive the resident data based on the resident_id

@@ -235,7 +235,7 @@ document.querySelector('#allocate-buttons').addEventListener('click', () => {
     if (response.ok) {
         
       // Display success message
-      alert('Form submitted successfully!');
+      alert('successfully!');
       // Reset form
       document.querySelector('#input').reset();
       // Redirect to home page
@@ -247,8 +247,9 @@ document.querySelector('#allocate-buttons').addEventListener('click', () => {
   })
   .catch(error => {
     // Display error message
-   
+    console.log(error);
   });
+
 });
 
 

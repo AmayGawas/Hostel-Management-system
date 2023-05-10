@@ -226,16 +226,12 @@
       guardianAddressCell.innerHTML = dummyData[i].guardian_address;
       guardianContactCell.innerHTML = dummyData[i].guardian_contact;
       guardianEmailCell.innerHTML = dummyData[i].guardian_email;
-      // approveButtonCell.innerHTML =  addButtonsToTable();
-
-
-
      addButtonsToTable(i+3);
 
     }
     })
       .catch(error => {
-
+        console.log(error);
       });
 
     function sortTableByDistance() {
@@ -272,13 +268,46 @@
         var Approved = document.createElement("button");
         Approved.textContent = "Approve";
         Approved.onclick = function () {
-          var applicationId = this.parentNode.parentNode.cells[0].textContent;
+          var applicatnId = this.parentNode.parentNode.cells[0].textContent;
           var value = "Approved";
-          var url = "https://";
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", url, true);
-          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-          xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
+          formData2={
+            applicant_id:pplicatnId,
+            status:value
+          };
+
+          fetch('http://127.0.0.1:8080/api/applicant/updateApplicationStatus', {
+            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            body: JSON.stringify(formData2), // body data type must match "Content-Type" header
+          }).then(response => {
+            if (response.ok) {
+                
+              // Display success message
+              alert('Form submitted successfully!');
+              // Reset form
+              document.querySelector('#registration-form').reset();
+              // Redirect to home page
+              //window.location.href = 'Index1.html';
+            } else {
+              // Display error message
+        
+            }
+          })
+          .catch(error => {
+            // Display error message
+          
+          });
+          // var url = "https://";
+          // var xhr = new XMLHttpRequest();
+          // xhr.open("POST", url, true);
+          // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          // xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
          };
 
         var rejected = document.createElement("button");
@@ -286,11 +315,39 @@
         rejected.onclick = function () {
           var applicationId = this.parentNode.parentNode.cells[0].textContent;
           var value = "Rejected";
-          var url = "https://";
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", url, true);
-          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-          xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
+          fetch('http://127.0.0.1:8080/api/applicant/deleteApplicant', {
+            method: "delete", // *GET, POST, PUT, DELETE, etc.
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+            //body: JSON.stringify(formData2), // body data type must match "Content-Type" header
+          }).then(response => {
+            if (response.ok) {
+              return response.json(); 
+              // Display success message
+              // alert('record deleted successfully!');
+              // // Reset form
+              // document.querySelector('#registration-form').reset();
+              // Redirect to home page
+              //window.location.href = 'Index1.html';
+            } else {
+              // Display error message
+              console.log("Error occured ");
+            }
+          })
+          .catch(error => {
+            // Display error message
+            console.log("Error occured ", error)
+          });
+      //     var url = "https://";
+      //     var xhr = new XMLHttpRequest();
+      //     xhr.open("POST", url, true);
+      //     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      //     xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
        };
 
         cell.appendChild(Approved);
