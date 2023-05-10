@@ -221,7 +221,7 @@ document.querySelector('#allocate-buttons').addEventListener('click', () => {
     applicant_id:applicantId 
      
   }
-  fetch('http://127.0.0.1:8080/api/warden/allocateRoom', {
+  fetch('http://127.0.0.1:8080/api/warden/', {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
     headers: {
