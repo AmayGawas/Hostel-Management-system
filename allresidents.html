@@ -41,9 +41,10 @@
         <table  id="card8">
             <thead>
                 <tr>
-                    <th>Applicant Name</th>
+                  <th>Resident id</th>
+                    <th>Resident Name</th>
                     <th>Course Type</th>
-                    <th>Applicant Course</th>
+                    <th>Resident  Course</th>
                     <th>Room No</th>
                     <th>Sex</th>
                     <th>Aadhar</th>
@@ -59,6 +60,7 @@
                     <th>Archive</th>
                 </tr>
                 <tr>
+                  <td id="resident_id"></td>
                   <td id="resident_Name"></td>
                   <td id="course_type"></td>
                   <td id="resident_course"></td>
@@ -89,7 +91,7 @@ var table = document.getElementById("card8");
 
 // create an array of dummy data objects
 let dummyData = []
-fetch('http://127.0.0.1:8080/api/applicant/getAllApplicant', {
+fetch('http://127.0.0.1:8080/api/warden/getAllResidents', {
   method: "get", // *GET, POST, PUT, DELETE, etc.
   cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
   headers: {
@@ -150,7 +152,7 @@ for (var i = 0; i < dummyData.length; i++) {
   bonifiedCell.innerHTML = dummyData[i].bonified_certificate;
   startCell.innerHTML = dummyData[i].start_date;
   endCell.innerHTML = dummyData[i].end_date;
-  addButtonsToTable(i+2);
+  //addButtonsToTable(i+2);
 }
 })
   .catch(error => {
@@ -168,9 +170,9 @@ const  addButtonsToTable=(i)=> {
         var value="Archive";
         var residentId = this.parentNode.parentNode.cells[0].textContent;
         Archive.onclick = archiveResident (residentId,"Archive") 
+        cell.appendChild(Archive);
 
       }
-      cell.appendChild(Archive);
 // Function to archive a resident
 function archiveResident(residentId,status) {
   // Make an API call to your backend to archive the resident data based on the resident_id

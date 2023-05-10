@@ -269,14 +269,15 @@
         Approved.textContent = "Approve";
         Approved.onclick = function () {
           var applicatnId = this.parentNode.parentNode.cells[0].textContent;
-          var value = "Approved";
+          console.log(applicatnId)
+          var value = "aproved";
           formData2={
-            applicant_id:pplicatnId,
-            status:value
+            applicant_id:applicatnId,
+            application_status:value
           };
 
           fetch('http://127.0.0.1:8080/api/applicant/updateApplicationStatus', {
-            method: "PUT", // *GET, POST, PUT, DELETE, etc.
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
             headers: {
               "Content-Type": "application/json",
@@ -315,7 +316,7 @@
         rejected.onclick = function () {
           var applicationId = this.parentNode.parentNode.cells[0].textContent;
           var value = "Rejected";
-          fetch('http://127.0.0.1:8080/api/applicant/deleteApplicant', {
+          fetch(`http://127.0.0.1:8080/api/applicant/deleteApplicant/${applicationId}`, {
             method: "delete", // *GET, POST, PUT, DELETE, etc.
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
             headers: {
