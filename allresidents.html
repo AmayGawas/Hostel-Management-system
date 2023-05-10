@@ -119,7 +119,16 @@ function loadResidents() {
   // Make an API call to your backend to get the resident data from the database
   // For example, you can use the fetch() method to make a GET request to an endpoint like /getResidents
   // The API response should return a JSON array of resident objects
-  fetch('/getResidents')
+  fetch('/http://127.0.0.1:8080/api/warden/getAllResidents/',{
+    method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    })
     .then(response => response.json())
     .then(residents => {
       // Loop through the residents and add them to the table
@@ -136,7 +145,7 @@ function loadResidents() {
 // Call the loadResidents() function to fetch and display the resident data in the table
 loadResidents();
 
-    </script>
+</script>
     
 </body>
 </html>

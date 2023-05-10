@@ -202,7 +202,7 @@
       var guardianAddressCell = row.insertCell(18);
       var guardianContactCell = row.insertCell(19);
       var guardianEmailCell = row.insertCell(20);
-
+      var approveButtonCell = row.insertCell(21)
 
       // add the data from the current object to the cells
       idCell.innerHTML = dummyData[i].applicant_id;
@@ -226,6 +226,11 @@
       guardianAddressCell.innerHTML = dummyData[i].guardian_address;
       guardianContactCell.innerHTML = dummyData[i].guardian_contact;
       guardianEmailCell.innerHTML = dummyData[i].guardian_email;
+      // approveButtonCell.innerHTML =  addButtonsToTable();
+
+
+
+     addButtonsToTable(i+3);
 
     }
     })
@@ -257,11 +262,12 @@
     }
 
 
-    function addButtonsToTable() {
+   const  addButtonsToTable=(i)=> {
+    console.log(i);
       var table = document.getElementById("card8");
       var rows = table.rows;
 
-      for (var i = 3; i < rows.length; i++) {
+      //for (var i = 1; i < rows.length; i++) {
         var cell = rows[i].insertCell(-1);
         var Approved = document.createElement("button");
         Approved.textContent = "Approve";
@@ -273,7 +279,7 @@
           xhr.open("POST", url, true);
           xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
-        };
+         };
 
         var rejected = document.createElement("button");
         rejected.textContent = "Reject";
@@ -285,14 +291,14 @@
           xhr.open("POST", url, true);
           xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           xhr.send(JSON.stringify({ applicationId: applicationId, value: value }));
-        };
+       };
 
         cell.appendChild(Approved);
         cell.appendChild(rejected);
-      }
+      // }
     }
 
-    addButtonsToTable();
+    // addButtonsToTable();
 
 
   </script>
