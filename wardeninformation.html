@@ -24,9 +24,9 @@
 		<div class="cards2">
 			<div class="card2">
 				<img id="wardenphoto" src="warden-men.jpg" alt="Warden of Men Hostel">
-				<h2 id="wardenname">John Doe</h2>
-				<p id="wardencontact">Contact: 1234567890</p>
-				<p id="wardenemail">Email: john.doe@hostel.com</p>
+				<h2 id="wardenname">D</h2>
+				<p id="wardencontact">Contact: 0</p>
+				<p id="wardenemail">Email: d@hostel.com</p>
 			</div>
 			
 		</div>
@@ -40,7 +40,7 @@
 	  function updateinformation(){
 //update warden name
 
-fetch('http://127.0.0.1:8080/api/warden/getVacancyBYWardenMail/john.doe@example.com', {
+fetch('http://127.0.0.1:8080/api/warden/getMyProfile/john.doe@example.com', {
       method: "get", // *GET, POST, PUT, DELETE, etc.
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
@@ -60,8 +60,12 @@ fetch('http://127.0.0.1:8080/api/warden/getVacancyBYWardenMail/john.doe@example.
       }
     }).then((responseJson) => {
       dummyData = responseJson;
-      const num=dummyData[0].vacancy;
-      wardennameelement.textContent = num;
+      const name=dummyData.warden_name;
+      const contact=dummyData.contact;
+      const email=dummyData.email;
+      wardennameelement.textContent =name ;
+      wardencontactelement.textContent=contact;
+      wardenemailelement.textContent=email;
     })
       .catch(error => {
         console.log("Error occured ", error)
@@ -69,91 +73,6 @@ fetch('http://127.0.0.1:8080/api/warden/getVacancyBYWardenMail/john.doe@example.
 
 //update warden name
 
-fetch('/getCurrentWarden/john.doe@example.com', {
-      method: "get", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer",
-    }).then(response => {
-      if (response.ok) {
-        if (response.ok) {
-          return response.json();
-        }
-      } else {
-        // Display error message
-        console.log("Error occured")
-      }
-    }).then((responseJson) => {
-      dummyData = responseJson;
-      const wardenphoto=dummyData[0].messFee;
-      wardenphotoelement.textContent = wardenphoto;
-    })
-      .catch(error => {
-        console.log("Error occured ", error)
-      });
-//warden photo
-
-
-//warden contact
-
-fetch('/getCurrentWarden/john.doe@example.com', {
-      method: "get", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer",
-    }).then(response => {
-      if (response.ok) {
-        if (response.ok) {
-          return response.json();
-        }
-      } else {
-        // Display error message
-        console.log("Error occured")
-      }
-    }).then((responseJson) => {
-      dummyData = responseJson;
-      const wardencontact=dummyData[0].messFee;
-      wardencontactelement.textContent = wardencontact;
-    })
-      .catch(error => {
-        console.log("Error occured ", error)
-      });
-
-
-	  fetch('/getCurrentWarden/john.doe@example.com', {
-      method: "get", // *GET, POST, PUT, DELETE, etc.
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      redirect: "follow", // manual, *follow, error
-      referrerPolicy: "no-referrer",
-    }).then(response => {
-      if (response.ok) {
-        if (response.ok) {
-          return response.json();
-        }
-      } else {
-        // Display error message
-        console.log("Error occured")
-      }
-    }).then((responseJson) => {
-      dummyData = responseJson;
-      const wardenemail=dummyData[0].messFee;
-      wardenemailelement.textContent = wardenemail;
-    })
-      .catch(error => {
-        console.log("Error occured ", error)
-      });
 
 	  }
 	  updateinformation();

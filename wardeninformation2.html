@@ -22,13 +22,60 @@
 		<h1>Warden Information</h1>
 		<div class="cards2">
 			<div class="card2">
-				<img src="warden-men.jpg" alt="Warden of Men Hostel">
-				<h2>John Doe</h2>
-				<p>Contact: 1234567890</p>
-				<p>Email: john.doe@hostel.com</p>
+				<img src="" alt="Warden of Men Hostel" id="wardenphoto">
+				<h2 id="wardenname">J</h2>
+				<p id="wardencontact">Contact: 1</p>
+				<p id="wardenemail">Email: j@hostel.com</p>
 			</div>
 		</div>
 	</div>
+	<script>
+		 const wardenphotoelement = document.getElementById('wardenphoto');
+	  const wardennameelement = document.getElementById('wardenname');
+	  const wardencontactelement = document.getElementById('wardencontact');
+	  const wardenemailelement = document.getElementById('wardenemail');
+		
+	  function loadData()
+		{
+			fetch('http://127.0.0.1:8080/api/warden/getCurrentWarden/1', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const photo=dummyData.photo;
+	  const name=dummyData.warden_name;
+	  const contact=dummyData.contact;
+	  const email=dummyData.email;
+
+	//   wardenphotoelement = photo;
+	  wardennameelement.textContent = name;
+	  wardencontactelement.textContent =contact;
+	  wardenemailelement.textContent = email;
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+		}
+
+		loadData();
+	</script>
+
 
     
 </body>

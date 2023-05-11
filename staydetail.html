@@ -55,22 +55,86 @@ const messamountElement = document.getElementById('messamount');
 // Function to update the numbers on the cards
 function updateNumber() {
 
-    
-  // Get the number of vacant rooms, new applications, and pending complaints from the server
-  const Roomdetails = 101; // Example number, replace with actual value from server
-  const  amountpaid= 5; // Example number, replace with actual value from server
-  const startdate = "02-02-2022";
-  const enddate = '02-02-2023';  // Example number, replace with actual value from server
-  const messpackage='5-day veg';
-  const messamount=22;
-  
-  // Update the numbers on the cards
-  RoomdetailsElement.textContent = Roomdetails;
-  amountpaidElement.textContent = amountpaid;
+    fetch('http://127.0.0.1:8080/api/hostelResident/getResidentInfo/25', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const Roomdetails=dummyData.room_no;
+      const startdate=dummyData.start_date;
+      const enddate=dummyData.end_date;
+
+      RoomdetailsElement.textContent=Roomdetails;
+    //   amountpaidElement.textContent = amountpaid;
   startdateElement.textContent = startdate;
   enddateElement.textContent= enddate;
-  messpackageElement.textContent=messpackage;
-  messamountElement.textContent=messamount;
+
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+
+      fetch('http://127.0.0.1:8080/api/hostelResident/getResidentPayment/25', {
+      method: "get", // *GET, POST, PUT, DELETE, etc.
+      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow", // manual, *follow, error
+      referrerPolicy: "no-referrer",
+    }).then(response => {
+      if (response.ok) {
+        if (response.ok) {
+          return response.json();
+        }
+      } else {
+        // Display error message
+        console.log("Error occured")
+      }
+    }).then((responseJson) => {
+      dummyData = responseJson;
+      const PaymentAmt=dummyData.payment_amt;
+      
+
+      amountpaidElement.textContent=PaymentAmt;
+
+    })
+      .catch(error => {
+        console.log("Error occured ", error)
+      });
+
+  // Get the number of vacant rooms, new applications, and pending complaints from the server
+//   const Roomdetails = 101; // Example number, replace with actual value from server
+//   const  amountpaid= 5; // Example number, replace with actual value from server
+//   const startdate = "02-02-2022";
+//   const enddate = '02-02-2023';  // Example number, replace with actual value from server
+//   const messpackage='5-day veg';
+//   const messamount=22;
+  
+  // Update the numbers on the cards
+//   RoomdetailsElement.textContent = Roomdetails;
+//   amountpaidElement.textContent = amountpaid;
+//   startdateElement.textContent = startdate;
+//   enddateElement.textContent= enddate;
+//   messpackageElement.textContent=messpackage;
+//   messamountElement.textContent=messamount;
 }
 
 // Call the function initially to set the numbers on page load
